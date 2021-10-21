@@ -48,7 +48,7 @@ html {
   a:hover {
     color: #000000;
   }
-  /* Header */
+  /* header a: all links inside Header */
   header a {
     color: #ffffff;
     padding: 1rem;
