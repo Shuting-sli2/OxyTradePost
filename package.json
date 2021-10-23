@@ -1,0 +1,33 @@
+{
+  "name": "oxytradepost",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --watch backend --exec node -- experimental-modules backend/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shuting-sli2/OxyTradePost.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Shuting-sli2/OxyTradePost/issues"
+  },
+  "homepage": "https://github.com/Shuting-sli2/OxyTradePost#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cross-env": "^7.0.3",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.13.11"
+  },
+  "devDependencies": {
+    "eslint-plugin-react": "^7.26.1",
+    "nodemon": "^2.0.13"
+  }
+}

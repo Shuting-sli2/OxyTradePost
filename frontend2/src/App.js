@@ -3,6 +3,7 @@ import {BrowserRouter} from 'react-router-dom';
 import { Route } from 'react-router-dom';
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
+import SigninScreen from './screens/SigninScreen';
 
 /* https://www.youtube.com/watch?v=TRCDsB9i3bI&t=2545s */
 /* make changes */
@@ -25,6 +26,7 @@ function App() {
       <main>
         <Route path="/product/:id" component={ProductScreen}></Route>
         <Route path="/" component={HomeScreen} exact></Route>
+        <Route path="/signin" component={SigninScreen}></Route>
         
       </main>
       <footer className="row center">All right reserved</footer>
