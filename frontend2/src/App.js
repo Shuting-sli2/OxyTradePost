@@ -5,6 +5,7 @@ import { Route } from 'react-router-dom';
 import { signout } from './actions/userActions';
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
+import RegisterScreen from './screens/RegisterScreen';
 import SigninScreen from './screens/SigninScreen';
 
 /* https://www.youtube.com/watch?v=TRCDsB9i3bI&t=2545s */
@@ -27,29 +28,31 @@ function App() {
             </a>
           </div>
           <div>
+            <Link to="/post">Post an Item</Link>
+          </div>
+          <div>
             {
               userInfo ? (
                 <div className="dropdown">
                   <Link to="#">{userInfo.name} <i className="fa fa-caret-down"></i> </Link>
-                
-                <ul className = "dropdown-content">
-                  <Link to="#signout" onClick={signoutHandler}>
+
+                  <ul className="dropdown-content">
+                    <Link to="#signout" onClick={signoutHandler}>
                       Sign Out
                     </Link>
-                </ul>
+                  </ul>
                 </div>
               ) : (
                 <Link to="/signin">Sign In</Link>
               )
             }
-
-
           </div>
         </header>
         <main>
           <Route path="/product/:id" component={ProductScreen}></Route>
           <Route path="/" component={HomeScreen} exact></Route>
           <Route path="/signin" component={SigninScreen}></Route>
+          <Route path="/register" component={RegisterScreen}></Route>
 
         </main>
         <footer className="row center">All right reserved</footer>
