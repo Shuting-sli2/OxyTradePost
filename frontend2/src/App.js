@@ -1,5 +1,6 @@
 import React from 'react';
-import {BrowserRouter} from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import {BrowserRouter, Link} from 'react-router-dom';
 import { Route } from 'react-router-dom';
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
@@ -9,6 +10,8 @@ import SigninScreen from './screens/SigninScreen';
 /* make changes */
 
 function App() {
+  const userSignin = useSelector((state) => state.userSignin);
+  const {userInfo} = userSignin; 
   return (
     <BrowserRouter>
     <div className="grid-container">
@@ -19,8 +22,15 @@ function App() {
           </a>
         </div>
         <div>
-          <a href="/cart">Cart</a>
-          <a href="/signin">Sign In</a>
+          {
+            userInfo ? (
+              <Link to ="#">{userInfo.name}</Link>
+            ): (
+              <Link to = "/signin">Sign In</Link>
+            )
+          }
+          
+
         </div>
       </header>
       <main>
