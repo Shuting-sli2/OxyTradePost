@@ -9,6 +9,7 @@ import RegisterScreen from './screens/RegisterScreen';
 import SigninScreen from './screens/SigninScreen';
 import ProductListScreen from './screens/ProductListScreen';
 import { createProduct } from './actions/productActions';
+import ProductEditScreen from './screens/ProductEditScreen';
 
 /* https://www.youtube.com/watch?v=TRCDsB9i3bI&t=2545s */
 /* make changes */
@@ -64,6 +65,11 @@ function App() {
           <Route path="/signin" component={SigninScreen}></Route>
           <Route path="/register" component={RegisterScreen}></Route>
           <Route path="/productlist/seller" component={ProductListScreen}></Route>
+          <Route
+            path="/product/:id/edit"
+            component={ProductEditScreen}
+            exact
+          ></Route>
         </main>
         <footer className="row center">All right reserved</footer>
       </div>
