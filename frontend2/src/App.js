@@ -8,6 +8,7 @@ import ProductScreen from './screens/ProductScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import SigninScreen from './screens/SigninScreen';
 import ProductListScreen from './screens/ProductListScreen';
+import { createProduct } from './actions/productActions';
 
 /* https://www.youtube.com/watch?v=TRCDsB9i3bI&t=2545s */
 /* make changes */
@@ -19,6 +20,10 @@ function App() {
   const signoutHandler = () => {
     dispatch(signout());
   };
+  const productCreate = useSelector((state) => state.productCreate);
+  const createHandler = () => {
+    dispatch(createProduct());
+  };
   return (
     <BrowserRouter>
       <div className="grid-container">
@@ -29,7 +34,7 @@ function App() {
             </a>
           </div>
           <div>
-            <Link to="/post">Post an Item</Link>
+            <Link to="/post" onClick={createHandler}>Post an Item</Link>
           </div>
           <div>
             {
