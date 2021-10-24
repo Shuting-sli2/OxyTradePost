@@ -7,6 +7,7 @@ import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import SigninScreen from './screens/SigninScreen';
+import ProductListScreen from './screens/ProductListScreen';
 
 /* https://www.youtube.com/watch?v=TRCDsB9i3bI&t=2545s */
 /* make changes */
@@ -35,11 +36,15 @@ function App() {
               userInfo ? (
                 <div className="dropdown">
                   <Link to="#">{userInfo.name} <i className="fa fa-caret-down"></i> </Link>
-
                   <ul className="dropdown-content">
+                    <li>
                     <Link to="#signout" onClick={signoutHandler}>
                       Sign Out
                     </Link>
+                    </li>
+                    <li>
+                    <Link to="/productlist/seller">Products</Link>
+                    </li>
                   </ul>
                 </div>
               ) : (
@@ -49,11 +54,11 @@ function App() {
           </div>
         </header>
         <main>
-          <Route path="/product/:id" component={ProductScreen}></Route>
+          <Route path="/product/:id" component={ProductScreen} exact></Route>
           <Route path="/" component={HomeScreen} exact></Route>
           <Route path="/signin" component={SigninScreen}></Route>
           <Route path="/register" component={RegisterScreen}></Route>
-
+          <Route path="/productlist/seller" component={ProductListScreen}></Route>
         </main>
         <footer className="row center">All right reserved</footer>
       </div>
