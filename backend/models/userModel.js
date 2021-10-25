@@ -7,7 +7,9 @@ const userSchema = new mongoose.Schema(
     password: { type: String, required: true },
   },
   {
-    timestamps: true,
+    timestamps: true, 
+    // by setting timestamp to true, it adds two more attributes
+    // created time + updated time
   }
 );
 const User = mongoose.model('User', userSchema);

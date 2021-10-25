@@ -11,7 +11,9 @@ userRouter.get(
   '/seed',
   expressAsyncHandler(async (req, res) => {
     await User.remove({});
-    const createdUsers = await User.insertMany(data.users);
+    const createdUsers = await User.insertMany(data.users); 
+    // insertMany insert the objects from the accepted array to the User collection
+    // by having this line of code, user data in data.js will be transformed to User models in Mongodb
     res.send({ createdUsers });
   })
 );
