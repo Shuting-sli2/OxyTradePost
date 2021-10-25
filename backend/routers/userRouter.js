@@ -45,6 +45,8 @@ userRouter.post(
       email: req.body.email,
       password: bcrypt.hashSync(req.body.password, 8),
     });
+    // When you create an instance of a Mongoose model using new
+    // calling save() makes Mongoose insert a new document
     const createdUser = await user.save();
     res.send({
       _id: createdUser._id,

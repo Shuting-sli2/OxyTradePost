@@ -7,7 +7,6 @@ import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import SigninScreen from './screens/SigninScreen';
-import ProductEditScreen from './screens/ProductEditScreen';
 import CreateProductScreen from './screens/CreateProductScreen';
 
 /* https://www.youtube.com/watch?v=TRCDsB9i3bI&t=2545s */
@@ -60,11 +59,6 @@ function App() {
           <Route path="/signin" component={SigninScreen}></Route>
           <Route path="/post" component={CreateProductScreen}></Route>
           <Route path="/register" component={RegisterScreen}></Route>
-          <Route
-            path="/product/:id/edit"
-            component={ProductEditScreen}
-            exact
-          ></Route>
         </main>
         <footer className="row center">All right reserved</footer>
       </div>

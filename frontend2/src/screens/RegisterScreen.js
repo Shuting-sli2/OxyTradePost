@@ -11,10 +11,12 @@ export default function RegisterScreen(props) {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
+  // redirect to a page when user finishes registration
   const redirect = props.location.search
     ? props.location.search.split('=')[1]
     : '/';
 
+    // state.userRegister is defined in store.js
   const userRegister = useSelector((state) => state.userRegister);
   const {userInfo, loading, error} = userRegister; 
 
