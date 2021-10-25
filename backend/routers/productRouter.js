@@ -40,10 +40,6 @@ productRouter.post('/post', expressAsyncHandler(async (req, res) => {
     image: '/images/p1.jpg',
     price: 0,
     category: 'sample category',
-    brand: 'sample brand',
-    countInStock: 0,
-    rating: 0,
-    numReviews: 0,
     description: 'sample description',
   });
   const createdProduct = await product.save();
