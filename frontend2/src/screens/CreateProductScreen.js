@@ -4,29 +4,39 @@ import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
 export default function ProductEditScreen(props) {
-    /*
+
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [image, setImage] = useState('');
   const [description, setDescription] = useState('');
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
-  const dispatch = useDispatch();
-  useEffect(() => {
-      setName(product.name);
-      setPrice(product.price);
-      setImage(product.image); 
-      setDescription(product.description);
-  }, [product, dispatch]);
+
+  const handleNameChange = e =>{
+    setName(e.target.value);
+  }
+
+  const handlePriceChange = e =>{
+    setPrice(e.target.value);
+  }
+
+  const handleImageChange = e =>{
+    setImage(e.target.value);
+  }
+
+  const handleDescriptionChange = e =>{
+    setDescription(e.target.value);
+  }
 
   const submitHandler = (e) => {
     e.preventDefault();
+    // alert(`name: ${name}\n price: ${price}\n image: ${image}\ndescription: ${description}\n `);
     // TODO: dispatch update product
   };
-*/
+
   return (
     <div>
-      <form className="form" >
+      <form className="form" onSubmit = {submitHandler}>
         <div>
           <h1>Create a post</h1>
         </div>
@@ -36,6 +46,8 @@ export default function ProductEditScreen(props) {
                 id="name"
                 type="text"
                 placeholder="Enter name"
+                value = {name}
+                onChange = {handleNameChange}
               ></input>
             </div>
             <div>
@@ -44,6 +56,8 @@ export default function ProductEditScreen(props) {
                 id="price"
                 type="text"
                 placeholder="Enter price"
+                value = {price}
+                onChange = {handlePriceChange}
               ></input>
             </div>
             <div>
@@ -52,6 +66,8 @@ export default function ProductEditScreen(props) {
                 id="image"
                 type="text"
                 placeholder="Enter image"
+                value = {image}
+                onChange = {handleImageChange}
               ></input>
             </div>
             <div>
@@ -61,12 +77,14 @@ export default function ProductEditScreen(props) {
                 rows="3"
                 type="text"
                 placeholder="Enter description"
+                value = {description}
+                onChange = {handleDescriptionChange}
               ></textarea>
             </div>
             <div>
               <label></label>
-              <button className="primary" type="submit">
-                Publish
+              <button className="primary" type="submit" >
+                Submit
               </button>
             </div>
       </form>
