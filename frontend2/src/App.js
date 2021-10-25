@@ -14,7 +14,7 @@ import CreateProductScreen from './screens/CreateProductScreen';
 /* make changes */
 
 function App() {
-
+  // useSelector is a function that takes the current state as an argument and returns whatever data you want from it
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   const dispatch = useDispatch();

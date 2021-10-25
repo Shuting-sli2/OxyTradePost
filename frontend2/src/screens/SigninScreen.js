@@ -7,23 +7,25 @@ import MessageBox from '../components/MessageBox';
 
 export default function SigninScreen(props) {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState(''); // setPassword is called in input tag: onChange={(e) => setPassword(e.target.value)}
 
-    // ?
+    // redirect user to shipping page or homepage
   const redirect = props.location.search
     ? props.location.search.split('=')[1]
     : '/';
 
-    // useSelector?
   const userSignin = useSelector((state) => state.userSignin);
   const {userInfo, loading, error} = userSignin; 
 
   const dispatch = useDispatch();
+
   const submitHandler = (e) => {
-    e.preventDefault();
+    e.preventDefault();// prevent page refresh after user submits the form
+    // constant, action, reducer, store
     dispatch(signin(email, password));
   };
 
+  // ?
   useEffect(() => {
     if (userInfo) {
       props.history.push(redirect);
