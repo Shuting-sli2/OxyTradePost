@@ -113,13 +113,22 @@ a.brand {
 /* Image */
 img {
   border-radius: 0.5rem;
+  height: auto;
+  width: auto;
+  max-height: 25rem;
+  max-width: 25rem;
 }
 img.medium{
   max-width: 29rem;
-  width: 100%;
+  max-height: 29rem;
+  height: auto;
+  width: auto;
 }
 img.large {
-  width: 100%;
+  max-width: 40rem;
+  max-height: 40rem;
+  height: auto;
+  width: auto;
 }
 /* Card */
 .card {
@@ -127,6 +136,8 @@ img.large {
   background-color: #f8f8f8;
   border-radius: 0.5rem;
   margin: 1rem;
+  width: 320px;
+  height: 415px;
 }
 .card-body {
   padding: 1rem;
