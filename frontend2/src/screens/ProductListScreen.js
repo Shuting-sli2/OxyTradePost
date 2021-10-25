@@ -8,9 +8,11 @@ import { PRODUCT_CREATE_RESET } from '../constants/productConstants';
 export default function ProductListScreen(props) {
     const productList = useSelector((state) => state.productList);
     const { loading, error, products } = productList;
+
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
     const dispatch = useDispatch();
+    
     const productCreate = useSelector((state) => state.productCreate);
     const {
         loading: loadingCreate,

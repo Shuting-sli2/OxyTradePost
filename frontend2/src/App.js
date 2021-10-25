@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Link } from 'react-router-dom';
 import { Route } from 'react-router-dom';
@@ -9,21 +9,20 @@ import RegisterScreen from './screens/RegisterScreen';
 import SigninScreen from './screens/SigninScreen';
 import ProductListScreen from './screens/ProductListScreen';
 import ProductEditScreen from './screens/ProductEditScreen';
-import { createProduct } from './actions/productActions';
+import CreateProductScreen from './screens/CreateProductScreen';
 
 /* https://www.youtube.com/watch?v=TRCDsB9i3bI&t=2545s */
 /* make changes */
 
 function App() {
+
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   const dispatch = useDispatch();
   const signoutHandler = () => {
     dispatch(signout());
   };
-  const createHandler = () => {
-    dispatch(createProduct());
-  };
+
   return (
     <BrowserRouter>
       <div className="grid-container">
@@ -33,9 +32,7 @@ function App() {
               OxyTradePost
             </a>
           </div>
-          <div>
-            <Link to="/post" onClick={createHandler}>Post an Item</Link>
-          </div>
+          <Link to="/post">Post an Item</Link>
           <div>
             {
               userInfo ? (
@@ -43,12 +40,12 @@ function App() {
                   <Link to="#">{userInfo.name} <i className="fa fa-caret-down"></i> </Link>
                   <ul className="dropdown-content">
                     <li>
-                    <Link to="#signout" onClick={signoutHandler}>
-                      Sign Out
-                    </Link>
+                      <Link to="#signout" onClick={signoutHandler}>
+                        Sign Out
+                      </Link>
                     </li>
                     <li>
-                    <Link to="/productlist/seller">Products</Link>
+                      <Link to="/productlist/seller">Products</Link>
                     </li>
                   </ul>
                 </div>
@@ -62,6 +59,7 @@ function App() {
           <Route path="/product/:id" component={ProductScreen} exact></Route>
           <Route path="/" component={HomeScreen} exact></Route>
           <Route path="/signin" component={SigninScreen}></Route>
+          <Route path="/post" component={CreateProductScreen}></Route>
           <Route path="/register" component={RegisterScreen}></Route>
           <Route path="/productlist/seller" component={ProductListScreen}></Route>
           <Route
