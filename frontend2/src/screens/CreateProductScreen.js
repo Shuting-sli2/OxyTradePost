@@ -1,16 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import LoadingBox from '../components/LoadingBox';
-import MessageBox from '../components/MessageBox';
-
-export default function ProductEditScreen(props) {
+import React, { useState } from 'react';
+export default function CreateProductScreen(props) {
 
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [image, setImage] = useState('');
   const [description, setDescription] = useState('');
-  const productDetails = useSelector((state) => state.productDetails);
-  const { loading, error, product } = productDetails;
 
   const handleNameChange = e =>{
     setName(e.target.value);
