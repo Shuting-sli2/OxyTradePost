@@ -16,7 +16,7 @@ export default function RegisterScreen(props) {
     ? props.location.search.split('=')[1]
     : '/';
 
-    // state.userRegister is defined in store.js
+  // state.userRegister is defined in store.js
   const userRegister = useSelector((state) => state.userRegister);
   const {userInfo, loading, error} = userRegister; 
 

@@ -34,16 +34,20 @@ productRouter.get(
   })
 );
 
-productRouter.post('/post', expressAsyncHandler(async (req, res) => {
-  const product = new Product({
-    name: 'sample name',
-    image: '/images/p1.jpg',
-    price: 0,
-    category: 'sample category',
-    description: 'sample description',
-  });
-  const createdProduct = await product.save();
-  res.send({message:'Product Created', product: createdProduct});
-}))
+productRouter.post(
+  '/post',
+  expressAsyncHandler(async (req, res) => {
+    // create a new instance of product
+    const product = new Product({
+      name: req.body.name,
+      image: req.body.image,
+      price: req.body.price,
+      category: req.body.category,
+      description: req.body.description,
+    });
+    // insert the product into the database
+    const createdProduct = await product.save();
+    res.send({ message: 'Product Created', product: createdProduct});
+  }))
 
 export default productRouter;
