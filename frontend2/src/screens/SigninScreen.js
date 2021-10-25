@@ -9,10 +9,12 @@ export default function SigninScreen(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+    // ?
   const redirect = props.location.search
     ? props.location.search.split('=')[1]
     : '/';
 
+    // useSelector?
   const userSignin = useSelector((state) => state.userSignin);
   const {userInfo, loading, error} = userSignin; 
 
