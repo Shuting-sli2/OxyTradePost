@@ -42,6 +42,7 @@ export default function CreateProductScreen(props) {
                 placeholder="Enter name"
                 value = {name}
                 onChange = {handleNameChange}
+                required
               ></input>
             </div>
             <div>
@@ -52,6 +53,7 @@ export default function CreateProductScreen(props) {
                 placeholder="Enter price"
                 value = {price}
                 onChange = {handlePriceChange}
+                required
               ></input>
             </div>
             <div>
@@ -62,6 +64,7 @@ export default function CreateProductScreen(props) {
                 placeholder="Enter image"
                 value = {image}
                 onChange = {handleImageChange}
+                required
               ></input>
             </div>
             <div>

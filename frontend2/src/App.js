@@ -7,7 +7,6 @@ import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import SigninScreen from './screens/SigninScreen';
-import ProductListScreen from './screens/ProductListScreen';
 import ProductEditScreen from './screens/ProductEditScreen';
 import CreateProductScreen from './screens/CreateProductScreen';
 
@@ -61,7 +60,6 @@ function App() {
           <Route path="/signin" component={SigninScreen}></Route>
           <Route path="/post" component={CreateProductScreen}></Route>
           <Route path="/register" component={RegisterScreen}></Route>
-          <Route path="/productlist/seller" component={ProductListScreen}></Route>
           <Route
             path="/product/:id/edit"
             component={ProductEditScreen}

@@ -26,7 +26,6 @@ export default function RegisterScreen(props) {
     } else{
       dispatch(register(name, email, password));
     }
-    
   };
 
   useEffect(() => {
