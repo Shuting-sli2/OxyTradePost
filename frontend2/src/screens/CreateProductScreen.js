@@ -35,7 +35,7 @@ export default function CreateProductScreen(props) {
           <h1>Create a post</h1>
         </div>
             <div>
-              <label htmlFor="name">Name</label>
+              <label htmlFor="name">Product Name</label>
               <input
                 id="name"
                 type="text"
