@@ -35,7 +35,7 @@ productRouter.get(
 );
 
 productRouter.post(
-  '/products',
+  '/',
   expressAsyncHandler(async (req, res) => {
     // create a new instance of product
     const product = new Product({

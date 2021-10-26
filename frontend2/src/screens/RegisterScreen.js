@@ -11,25 +11,23 @@ export default function RegisterScreen(props) {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  // redirect to a page when user finishes registration
-  const redirect = props.location.search
-    ? props.location.search.split('=')[1]
-    : '/';
-
   // state.userRegister is defined in store.js
   const userRegister = useSelector((state) => state.userRegister);
-  const {userInfo, loading, error} = userRegister; 
-
+  const { userInfo, loading, error } = userRegister;
   const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
-    if (password !== confirmPassword){
+    if (password !== confirmPassword) {
       alert('Password and confirm password are not match')
-    } else{
+    } else {
       dispatch(register(name, email, password));
     }
   };
 
+  // redirect to a page when user finishes registration
+  const redirect = props.location.search
+    ? props.location.search.split('=')[1]
+    : '/';
   useEffect(() => {
     if (userInfo) {
       props.history.push(redirect);
@@ -43,7 +41,7 @@ export default function RegisterScreen(props) {
           <h1>Register</h1>
         </div>
         {loading && <LoadingBox></LoadingBox>}
-        {error && <MessageBox variant = "danger">{error}</MessageBox>}
+        {error && <MessageBox variant="danger">{error}</MessageBox>}
         <div>
           <label htmlFor="name">Name</label>
           <input

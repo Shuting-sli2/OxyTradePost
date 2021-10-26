@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createProduct } from '../actions/productActions';
-import { PRODUCT_CREATE_RESET } from '../constants/productConstants';
 export default function CreateProductScreen(props) {
 
     const [name, setName] = useState('');
@@ -10,6 +9,7 @@ export default function CreateProductScreen(props) {
     const [description, setDescription] = useState('');
 
     // state.productCreate is defined in store.js
+    /*
     const productCreate = useSelector((state) => state.productCreate);
     const {
         loading: loadingCreate,
@@ -17,21 +17,22 @@ export default function CreateProductScreen(props) {
         success: successCreate,
         product: createdProduct,
     } = productCreate;
-
+    */
+    
     const dispatch = useDispatch();
-
     const submitHandler = (e) => {
       e.preventDefault();
-      dispatch(createProduct());
+      // alert(`name: ${name}\n price: ${price}\n image: ${image}\ndescription: ${description}\n `);
+      dispatch(createProduct({name, price, image, description}));
+      /*
+      fetch('/', {
+        method: 'POST',
+        headers: {"Content-type": "application/json"},
+        body: JSON.stringify(product)
+      }).then(() => {
+          console.log("new product added.");
+      })*/
     };
-
-    /*
-    const submitHandler = (e) => {
-        e.preventDefault();
-        // alert(`name: ${name}\n price: ${price}\n image: ${image}\ndescription: ${description}\n `);
-        // TODO: dispatch update product
-    };
-    */
 
     return (
         <div>
