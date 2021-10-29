@@ -39,7 +39,7 @@ export const detailsProduct = (productId) => async (dispatch) => {
   };
 
   export const createProduct = (name, price, image, description) => async (dispatch) => {
-    dispatch({ type: PRODUCT_CREATE_REQUEST ,payload: { name, price, description }});
+    dispatch({ type: PRODUCT_CREATE_REQUEST ,payload: {name, price, image, description}});
     /*
     const {
       userSignin: { userInfo },
@@ -47,15 +47,17 @@ export const detailsProduct = (productId) => async (dispatch) => {
     */
     try {
       const { data } = await Axios.post(
-        '/api/post',
-        { name, price, image, description },
+        '/api/products/post',
+        {name, price, image, description},
         //{headers: { Authorization: `Bearer ${userInfo.token}` },}
       );
       dispatch({
         type: PRODUCT_CREATE_SUCCESS,
         payload: data,
       });
+      //console.log('success');
     } catch (error) {
+      // console.log('error');
       const message =
         error.response && error.response.data.message
           ? error.response.data.message

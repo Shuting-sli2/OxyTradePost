@@ -35,19 +35,28 @@ productRouter.get(
 );
 
 productRouter.post(
-  '/',
+  '/post',
   expressAsyncHandler(async (req, res) => {
     // create a new instance of product
+    // res.send(req.body); // req.body = {"name":"book"}
+    if (!req.body){
+      return res.status(400).send('Request body is missing');
+    }
     const product = new Product({
       name: req.body.name,
       image: req.body.image,
       price: req.body.price,
-      category: req.body.category,
       description: req.body.description,
     });
+    
     // insert the product into the database
-    const createdProduct = await product.save();
-    res.send({ message: 'Product Created', product: createdProduct});
+    const newProduct = await product.save(); //this.save() might not be working
+    res.send({
+      name: newProduct.name,
+      image: newProduct.image,
+      price: newProduct.price,
+      description: newProduct.description,
+    });
   }))
 
 export default productRouter;
