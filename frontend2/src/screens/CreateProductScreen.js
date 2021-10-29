@@ -14,7 +14,6 @@ export default function CreateProductScreen(props) {
     const submitHandler = (e) => {
       e.preventDefault();
       // alert(`name: ${name}\n price: ${price}\n image: ${image}\ndescription: ${description}\n `);
-      console.log(selectedFile);
       dispatch(createProduct(name, price, selectedFile, description));
     };
 
