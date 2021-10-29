@@ -1,20 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createProduct } from '../actions/productActions';
-import FileUploader from '../components/FileUploader';
+// import FileUploader from '../components/FileUploader';
+import ImageUploader from "react-images-upload";
+
 export default function CreateProductScreen(props) {
 
     // link state to the form's input fields
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
-    const [selectedFile, setSelectedFile] = useState(null);
+    // const [selectedFile, setSelectedFile] = useState(null);
     const [description, setDescription] = useState('');
+    const [images, setImages] = useState([]);
+
 
     const dispatch = useDispatch();
     const submitHandler = (e) => {
-      e.preventDefault();
-      // alert(`name: ${name}\n price: ${price}\n image: ${image}\ndescription: ${description}\n `);
-      dispatch(createProduct(name, price, selectedFile, description));
+        e.preventDefault();
+        // alert(`name: ${name}\n price: ${price}\n image: ${image}\ndescription: ${description}\n `);
+        dispatch(createProduct(name, price, images, description));
     };
 
     return (
@@ -47,10 +51,17 @@ export default function CreateProductScreen(props) {
                 </div>
                 <div>
                     <label htmlFor="image">Image</label>
-                    <FileUploader
-                        onFileSelectSuccess = {(file) => setSelectedFile(file)}
-                        onFileSelectError = {({error}) => alert(error)}
-                    ></FileUploader>
+                    <ImageUploader
+                        id="images"
+                        type="File"
+                        placeholder="Enter price"
+                        value={price}
+                        onChange={(e) => setImages(e.target.value)}
+                        withIcon={true}
+                        imgExtension={[".jpg", ".gif", ".png", ".gif"]}
+                        maxFileSize={5242880}
+                        required
+                    ></ImageUploader>
                 </div>
                 <div>
                     <label htmlFor="description">Description</label>

@@ -45,7 +45,7 @@ productRouter.post(
     }
     const product = new Product({
       name: req.body.name,
-      image: req.body.selectedFile,
+      images: req.body.images,
       price: req.body.price,
       description: req.body.description,
     });
