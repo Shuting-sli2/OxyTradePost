@@ -15,6 +15,9 @@ export default function CreateProductScreen(props) {
 
 
     const dispatch = useDispatch();
+    const onDrop = image => {
+        setImages([...images, image]);
+      };
     const submitHandler = (e) => {
         e.preventDefault();
         // alert(`name: ${name}\n price: ${price}\n image: ${image}\ndescription: ${description}\n `);
@@ -56,7 +59,7 @@ export default function CreateProductScreen(props) {
                         type="File"
                         placeholder="Enter price"
                         value={price}
-                        onChange={(e) => setImages(e.target.value)}
+                        onChange={onDrop}
                         withIcon={true}
                         imgExtension={[".jpg", ".gif", ".png", ".gif"]}
                         maxFileSize={5242880}
