@@ -11,13 +11,11 @@ export default function CreateProductScreen(props) {
     const [price, setPrice] = useState('');
     // const [selectedFile, setSelectedFile] = useState(null);
     const [description, setDescription] = useState('');
-    const [images, setImages] = useState([]);
-
-
+    const [images, setImages] = useState([])
     const dispatch = useDispatch();
     const onDrop = image => {
         setImages([...images, image]);
-      };
+    };
     const submitHandler = (e) => {
         e.preventDefault();
         // alert(`name: ${name}\n price: ${price}\n image: ${image}\ndescription: ${description}\n `);
@@ -55,6 +53,7 @@ export default function CreateProductScreen(props) {
                 <div>
                     <label htmlFor="image">Image</label>
                     <ImageUploader
+                        {...props}
                         id="images"
                         type="File"
                         placeholder="Enter price"
