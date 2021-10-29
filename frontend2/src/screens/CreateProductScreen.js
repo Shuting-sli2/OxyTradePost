@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createProduct } from '../actions/productActions';
+import FileUploader from '../components/FileUploader';
 export default function CreateProductScreen(props) {
 
     // link state to the form's input fields
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
-    const [image, setImage] = useState('');
+    const [selectedFile, setSelectedFile] = useState(null);
     const [description, setDescription] = useState('');
 
     const dispatch = useDispatch();
     const submitHandler = (e) => {
       e.preventDefault();
       // alert(`name: ${name}\n price: ${price}\n image: ${image}\ndescription: ${description}\n `);
-      dispatch(createProduct(name, price, image, description));
+      console.log(selectedFile);
+      dispatch(createProduct(name, price, selectedFile, description));
     };
 
     return (
@@ -46,14 +48,10 @@ export default function CreateProductScreen(props) {
                 </div>
                 <div>
                     <label htmlFor="image">Image</label>
-                    <input
-                        id="image"
-                        type="text"
-                        placeholder="Enter image"
-                        value={image}
-                        onChange={(e) => setImage(e.target.value)}
-                        required
-                    ></input>
+                    <FileUploader
+                        onFileSelectSuccess = {(file) => setSelectedFile(file)}
+                        onFileSelectError = {({error}) => alert(error)}
+                    ></FileUploader>
                 </div>
                 <div>
                     <label htmlFor="description">Description</label>

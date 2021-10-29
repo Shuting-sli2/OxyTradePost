@@ -11,6 +11,10 @@ import {
     PRODUCT_LIST_SUCCESS,
 } from '../constants/productConstants';
 
+const config = {     
+  headers: { 'content-type': 'multipart/form-data' }
+}
+
 export const listProducts = () => async (dispatch) => {
     dispatch({
         type: PRODUCT_LIST_REQUEST,
@@ -38,8 +42,8 @@ export const detailsProduct = (productId) => async (dispatch) => {
     }
   };
 
-  export const createProduct = (name, price, image, description) => async (dispatch) => {
-    dispatch({ type: PRODUCT_CREATE_REQUEST ,payload: {name, price, image, description}});
+  export const createProduct = (name, price, selectedFile, description) => async (dispatch) => {
+    dispatch({ type: PRODUCT_CREATE_REQUEST ,payload: {name, price, selectedFile, description}});
     /*
     const {
       userSignin: { userInfo },
@@ -48,7 +52,7 @@ export const detailsProduct = (productId) => async (dispatch) => {
     try {
       const { data } = await Axios.post(
         '/api/products/post',
-        {name, price, image, description},
+        {name, price, selectedFile, description}
         //{headers: { Authorization: `Bearer ${userInfo.token}` },}
       );
       dispatch({

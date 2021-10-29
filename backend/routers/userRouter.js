@@ -14,7 +14,7 @@ userRouter.get(
     const createdUsers = await User.insertMany(data.users); 
     // insertMany insert the objects from the accepted array to the User collection
     // by having this line of code, user data in data.js will be transformed to User models in Mongodb
-    res.send({ createdUsers });
+    res.send({ createdUsers});
   })
 );
 
@@ -47,13 +47,16 @@ userRouter.post(
     });
     // When you create an instance of a Mongoose model using new
     // calling save() makes Mongoose insert a new document
-    const createdUser = await user.save();
-    res.send({
-      _id: createdUser._id,
-      name: createdUser.name,
-      email: createdUser.email,
-      token: generateToken(createdUser),
-    });
+    if (req.body.email.endsWith("@oxy.edu")){
+      const createdUser = await user.save();
+      res.send({
+        _id: createdUser._id,
+        name: createdUser.name,
+        email: createdUser.email,
+        token: generateToken(createdUser),
+      });
+    }
+    res.status(401).send({ message: 'Invalid Oxy email.' }); // set loading to false & write error message
   })
 );
 
