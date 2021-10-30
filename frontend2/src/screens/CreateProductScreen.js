@@ -32,16 +32,13 @@ export default function CreateProductScreen(props) {
                 .post(url, formData)
                 .then((result) => {
                     // console.log(result.data.secure_url);
-                    imageUrl = result.data.secure_url
-                    // console.log(imageUrl);
-
+                    imageUrl = result.data.secure_url;
                 })
                 .catch((err) => {
                     console.log(err);
                 })
-
-
             // send another POST request to server to create a product instance in the database
+            // console.log(imageUrl);
             dispatch(createProduct(name, price, imageUrl, description));
             // setImage(image.data); 
                 // image.data returned by database
