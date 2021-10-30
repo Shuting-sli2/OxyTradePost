@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createProduct } from '../actions/productActions';
-// import FileUploader from '../components/FileUploader';
-import ImageUploader from "react-images-upload";
+// import ImageUploader from "react-images-upload"; // https://github.com/JakeHartnell/react-images-upload
+import FileUploader from '../components/FileUploader';
 
 export default function CreateProductScreen(props) {
 
@@ -21,6 +21,20 @@ export default function CreateProductScreen(props) {
         // alert(`name: ${name}\n price: ${price}\n image: ${image}\ndescription: ${description}\n `);
         dispatch(createProduct(name, price, images, description));
     };
+
+    /*
+    // redirect user
+    const redirect = props.location.search
+        ? props.location.search.split('=')[1]
+        : '/';
+    const productCreated = useSelector((state) => state.userSignin);
+    const { productCreated, loading, error } = userSignin;
+    useEffect(() => {
+        if (userInfo) {
+            props.history.push(redirect);
+        }
+    }, [props.history, redirect, userInfo]);
+    */
 
     return (
         <div>
@@ -52,7 +66,7 @@ export default function CreateProductScreen(props) {
                 </div>
                 <div>
                     <label htmlFor="image">Image</label>
-                    <ImageUploader
+                    <FileUploader
                         {...props}
                         id="images"
                         type="File"
@@ -63,7 +77,7 @@ export default function CreateProductScreen(props) {
                         imgExtension={[".jpg", ".gif", ".png", ".gif"]}
                         maxFileSize={5242880}
                         required
-                    ></ImageUploader>
+                    ></FileUploader>
                 </div>
                 <div>
                     <label htmlFor="description">Description</label>

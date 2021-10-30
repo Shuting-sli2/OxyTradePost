@@ -15,6 +15,7 @@ const initialState = {
   },
 };
 
+
 const reducer = combineReducers({
   productList: productListReducer,
   productDetails: productDetailsReducer,
