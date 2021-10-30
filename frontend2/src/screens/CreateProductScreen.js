@@ -12,8 +12,8 @@ const firebaseConfig = {
     messagingSenderId: "313038145745",
     appId: "1:313038145745:web:3bcc086c5ce746403d9df0",
     measurementId: "G-1ZYL5257J2"
-  };
-  const app = initializeApp(firebaseConfig);
+};
+const app = initializeApp(firebaseConfig);
 
 
 export default function CreateProductScreen(props) {
@@ -30,6 +30,10 @@ export default function CreateProductScreen(props) {
         // alert(`name: ${name}\n price: ${price}\n image: ${image}\ndescription: ${description}\n `);
         dispatch(createProduct(name, price, image, description));
     };
+
+    const onChangeImage  = (e) => {
+            setImage(e.target.value);
+    }
     console.log('image: ', image);
     return (
         <div>
@@ -66,8 +70,9 @@ export default function CreateProductScreen(props) {
                         type="file"
                         placeholder="Select an image"
                         value={image}
-                        onChange={(e) => setImage(e.target.value)}
+                        onChange={onChangeImage}
                         required
+                        multiple
                     ></input>
                 </div>
                 <div>
