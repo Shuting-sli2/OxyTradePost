@@ -5,7 +5,7 @@ import axios from 'axios';
 // import ImageUploader from "react-images-upload"; // https://github.com/JakeHartnell/react-images-upload
 
 const url = 'https://api.cloudinary.com/v1_1/oxytradepost/image/upload';
-const preset = 'ml_default';
+const preset = 'coreja3i';
 
 export default function CreateProductScreen(props) {
 
@@ -24,33 +24,28 @@ export default function CreateProductScreen(props) {
         // submit that image to Cloudinary with an upload button and onClick={onSubmit} method
         const formData = new FormData(); // These keys are required by Cloudinary so, they must match exactly with the syntax above otherwise your upload will be failed.
         formData.append('file', image);
-        formData.append('upload_preset', 'coreja3i');
+        formData.append('upload_preset', preset);
         try {
             // send a POST request to Cloudinarys
-            const res = axios.post(url, formData); // await?
-            // successfullay uploaded on Cloudinary, but response pending?
-            // if it succeeds, we will get an imageUrl
-            console.log(res);
+            var imageUrl = '';
+            axios
+                .post(url, formData)
+                .then((result) => {
+                    // console.log(result.data.secure_url);
+                    imageUrl = result.data.secure_url
+                    // console.log(imageUrl);
 
-
-
-            var imageUrl = null;
-            if (res.data.secure_url && res.data.secure_url !== '') {
-                console.log(res.json());
-                /*
-                Promise {<pending>}
-                    [[Prototype]]: Promise
-                    [[PromiseState]]: "fulfilled"
-                    [[PromiseResult]]: Object
-                */
-                imageUrl = res.data.secure_url; // Cannot read properties of undefined (reading 'secure_url')
-            }
-
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
 
 
             // send another POST request to server to create a product instance in the database
             dispatch(createProduct(name, price, imageUrl, description));
-            setImage(image.data);
+            // setImage(image.data); 
+                // image.data returned by database
+                // display image in the webpage
         } catch (err) {
             console.error(err);
         }
