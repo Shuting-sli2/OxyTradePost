@@ -27,19 +27,17 @@ export default function CreateProductScreen(props) {
         formData.append('upload_preset', preset);
         try {
             // send a POST request to Cloudinarys
-            var imageUrl = '';
             axios
                 .post(url, formData)
                 .then((result) => {
                     // console.log(result.data.secure_url);
-                    imageUrl = result.data.secure_url;
+                    var imageUrl = result.data.secure_url;
+                    console.log(imageUrl);
+                    dispatch(createProduct(name, price, imageUrl, description));
                 })
                 .catch((err) => {
                     console.log(err);
                 })
-            // send another POST request to server to create a product instance in the database
-            // console.log(imageUrl);
-            dispatch(createProduct(name, price, imageUrl, description));
             // setImage(image.data); 
                 // image.data returned by database
                 // display image in the webpage
