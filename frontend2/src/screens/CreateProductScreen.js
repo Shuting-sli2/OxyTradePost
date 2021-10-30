@@ -28,9 +28,26 @@ export default function CreateProductScreen(props) {
         try {
             // send a POST request to Cloudinarys
             const res = axios.post(url, formData); // await?
+            // successfullay uploaded on Cloudinary, but response pending?
             // if it succeeds, we will get an imageUrl
-            //console.log(res);
-            const imageUrl = res.data.secure_url;
+            console.log(res);
+
+
+
+            var imageUrl = null;
+            if (res.data.secure_url && res.data.secure_url !== '') {
+                console.log(res.json());
+                /*
+                Promise {<pending>}
+                    [[Prototype]]: Promise
+                    [[PromiseState]]: "fulfilled"
+                    [[PromiseResult]]: Object
+                */
+                imageUrl = res.data.secure_url; // Cannot read properties of undefined (reading 'secure_url')
+            }
+
+
+
             // send another POST request to server to create a product instance in the database
             dispatch(createProduct(name, price, imageUrl, description));
             setImage(image.data);
