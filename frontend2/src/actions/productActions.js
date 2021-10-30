@@ -38,12 +38,12 @@ export const detailsProduct = (productId) => async (dispatch) => {
     }
   };
 
-  export const createProduct = (name, price, image, description) => async (dispatch) => {
-    dispatch({ type: PRODUCT_CREATE_REQUEST ,payload: {name, price, image, description}});
+  export const createProduct = (name, price, imageUrl, description) => async (dispatch) => {
+    dispatch({ type: PRODUCT_CREATE_REQUEST ,payload: {name, price, imageUrl, description}});
     try {
       const { data } = await Axios.post(
         '/api/products/post',
-        {name, price, image, description}
+        {name, price, imageUrl, description}
         //{headers: { Authorization: `Bearer ${userInfo.token}` },}
       );
       dispatch({

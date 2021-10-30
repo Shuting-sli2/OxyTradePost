@@ -34,28 +34,25 @@ productRouter.get(
   })
 );
 
-// post API: send createdProduct info to createProductAction
+// create a post API: insert a product instance into the database
 productRouter.post(
   '/post',
   expressAsyncHandler(async (req, res) => {
     // create a new instance of product
-    res.send(req.data); 
     if (!req.body){
       return res.status(400).send('Request body is missing');
     }
     const product = new Product({
       name: req.body.name,
-      image: req.body.image,
+      imageUrl: req.body.imageUrl, 
       price: req.body.price,
       description: req.body.description,
     });
-    
     // insert the product into the database
     const newProduct = await product.save(); //this.save() might not be working
-
     res.send({
       name: newProduct.name,
-      image: newProduct.image,
+      imageUrl: newProduct.imageUrl,
       price: newProduct.price,
       description: newProduct.description,
     });

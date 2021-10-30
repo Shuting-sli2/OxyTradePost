@@ -1,43 +1,47 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createProduct } from '../actions/productActions';
+import Axios from 'axios';
+import axios from 'axios';
 // import ImageUploader from "react-images-upload"; // https://github.com/JakeHartnell/react-images-upload
-import { initializeApp } from 'firebase/app';
 
-const firebaseConfig = {
-    apiKey: "AIzaSyADmD_z94mkhYsHjo9PXF7oCIuJG4YBC0w",
-    authDomain: "oxytradepost-image-upload.firebaseapp.com",
-    projectId: "oxytradepost-image-upload",
-    storageBucket: "oxytradepost-image-upload.appspot.com",
-    messagingSenderId: "313038145745",
-    appId: "1:313038145745:web:3bcc086c5ce746403d9df0",
-    measurementId: "G-1ZYL5257J2"
-};
-const app = initializeApp(firebaseConfig);
-
+const url = 'CLOUDINARY_URL=cloudinary://274663193337789:RX_iXmI863h8_6vyjty6Z1cpa14@oxytradepost/image/upload';
+const preset = 'ml_default';
 
 export default function CreateProductScreen(props) {
 
     // link state to the form's input fields
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
-    // const [selectedFile, setSelectedFile] = useState(null);
     const [description, setDescription] = useState('');
-    const [image, setImage] = useState([])
+    const [image, setImage] = useState([]);
     const dispatch = useDispatch();
-    const submitHandler = (e) => {
-        e.preventDefault();
-        // alert(`name: ${name}\n price: ${price}\n image: ${image}\ndescription: ${description}\n `);
-        dispatch(createProduct(name, price, image, description));
-    };
-
-    const onChangeImage  = (e) => {
-            setImage(e.target.value);
+    const onChange = (e) => {
+        setImage(e.target.files[0]);
     }
-    console.log('image: ', image);
+    const onSubmit = (e) => {
+        e.preventDefault();
+        // deals with image submit button
+        // submit that image to Cloudinary with an upload button and onClick={onSubmit} method
+        const formData = new FormData(); // These keys are required by Cloudinary so, they must match exactly with the syntax above otherwise your upload will be failed.
+        formData.append('file', image);
+        formData.append('upload_preset', preset);
+        try {
+            // send a POST request to Cloudinary
+            const res = axios.post(url, formData); // await?
+            // if it succeeds, we will get an imageUrl
+            const imageUrl = res.data.secure_url;
+            // send another POST request to server to create a product instance in the database
+            dispatch(createProduct(name, price, imageUrl, description));
+            setImage(image.data);
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
     return (
         <div>
-            <form className="form" onSubmit={submitHandler}>
+            <form className="form" onSubmit={onSubmit}>
                 <div>
                     <h1>Create a post</h1>
                 </div>
@@ -70,7 +74,7 @@ export default function CreateProductScreen(props) {
                         type="file"
                         placeholder="Select an image"
                         value={image}
-                        onChange={onChangeImage}
+                        onChange={onChange}
                         required
                         multiple
                     ></input>

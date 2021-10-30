@@ -6,10 +6,12 @@ import dotenv from 'dotenv';
 import userRouter from './routers/userRouter.js';
 import productRouter from './routers/productRouter.js';
 
+var cors = require('cors')
 dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors())
 // eslint-disable-next-line no-undef
 // connect mogoose to mogodb database
 mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost/oxytradepost', {
