@@ -33,7 +33,14 @@ export default function CreateProductScreen(props) {
                     // console.log(result.data.secure_url);
                     var imageUrl = result.data.secure_url;
                     console.log(imageUrl);
-                    dispatch(createProduct(name, price, imageUrl, description));
+                    // const data = dispatch(createProduct(name, price, imageUrl, description));
+                    axios.post(
+                        '/api/products/post',
+                        {name, price, imageUrl, description}
+                    ).then((data)=>{
+                        console.log("imageUrl from server api: ", data.data.imageUrl);
+                        setImage(data.data.imageUrl);
+                    })
                 })
                 .catch((err) => {
                     console.log(err);

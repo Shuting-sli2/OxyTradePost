@@ -7,6 +7,7 @@ import {
 } from './reducers/productReducers';
 import { userRegisterReducer, userSigninReducer } from './reducers/userReducers';
 
+// understand localStorage
 const initialState = {
   userSignin: {
     userInfo: localStorage.getItem('userInfo')
@@ -14,7 +15,6 @@ const initialState = {
       : null,
   },
 };
-
 
 const reducer = combineReducers({
   productList: productListReducer,

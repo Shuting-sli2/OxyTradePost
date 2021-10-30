@@ -50,7 +50,8 @@ export const detailsProduct = (productId) => async (dispatch) => {
         type: PRODUCT_CREATE_SUCCESS,
         payload: data,
       });
-      //console.log('success');
+      // console.log('success with data: ', data);
+      return data;
     } catch (error) {
       // console.log('error');
       const message =
