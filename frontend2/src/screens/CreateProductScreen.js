@@ -2,7 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createProduct } from '../actions/productActions';
 // import ImageUploader from "react-images-upload"; // https://github.com/JakeHartnell/react-images-upload
-import FileUploader from '../components/FileUploader';
+import { initializeApp } from 'firebase/app';
+
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+    apiKey: "AIzaSyADmD_z94mkhYsHjo9PXF7oCIuJG4YBC0w",
+    authDomain: "oxytradepost-image-upload.firebaseapp.com",
+    projectId: "oxytradepost-image-upload",
+    storageBucket: "oxytradepost-image-upload.appspot.com",
+    messagingSenderId: "313038145745",
+    appId: "1:313038145745:web:3bcc086c5ce746403d9df0",
+    measurementId: "G-1ZYL5257J2"
+  };
+  const app = initializeApp(firebaseConfig);
+
 
 export default function CreateProductScreen(props) {
 
@@ -11,30 +24,16 @@ export default function CreateProductScreen(props) {
     const [price, setPrice] = useState('');
     // const [selectedFile, setSelectedFile] = useState(null);
     const [description, setDescription] = useState('');
-    const [images, setImages] = useState([])
+    const [image, setImage] = useState([])
     const dispatch = useDispatch();
-    const onDrop = image => {
-        setImages([...images, image]);
-    };
     const submitHandler = (e) => {
         e.preventDefault();
         // alert(`name: ${name}\n price: ${price}\n image: ${image}\ndescription: ${description}\n `);
-        dispatch(createProduct(name, price, images, description));
+        dispatch(createProduct(name, price, image, description));
     };
-
-    /*
-    // redirect user
-    const redirect = props.location.search
-        ? props.location.search.split('=')[1]
-        : '/';
-    const productCreated = useSelector((state) => state.userSignin);
-    const { productCreated, loading, error } = userSignin;
-    useEffect(() => {
-        if (userInfo) {
-            props.history.push(redirect);
-        }
-    }, [props.history, redirect, userInfo]);
-    */
+    console.log('image: ', image);
+    const handleUpload = () => {
+    }
 
     return (
         <div>
@@ -66,18 +65,14 @@ export default function CreateProductScreen(props) {
                 </div>
                 <div>
                     <label htmlFor="image">Image</label>
-                    <FileUploader
-                        {...props}
-                        id="images"
-                        type="File"
-                        placeholder="Enter price"
-                        value={price}
-                        onChange={onDrop}
-                        withIcon={true}
-                        imgExtension={[".jpg", ".gif", ".png", ".gif"]}
-                        maxFileSize={5242880}
+                    <input
+                        id="image"
+                        type="file"
+                        placeholder="Select an image"
+                        value={image}
+                        onChange={(e) => setImage(e.target.file[0])}
                         required
-                    ></FileUploader>
+                    ></input>
                 </div>
                 <div>
                     <label htmlFor="description">Description</label>
