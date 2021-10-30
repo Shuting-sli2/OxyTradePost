@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createProduct } from '../actions/productActions';
-import Axios from 'axios';
 import axios from 'axios';
 // import ImageUploader from "react-images-upload"; // https://github.com/JakeHartnell/react-images-upload
 
-const url = 'CLOUDINARY_URL=cloudinary://274663193337789:RX_iXmI863h8_6vyjty6Z1cpa14@oxytradepost/image/upload';
+const url = 'https://api.cloudinary.com/v1_1/oxytradepost/image/upload';
 const preset = 'ml_default';
 
 export default function CreateProductScreen(props) {
@@ -14,7 +13,7 @@ export default function CreateProductScreen(props) {
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
     const [description, setDescription] = useState('');
-    const [image, setImage] = useState([]);
+    const [image, setImage] = useState('');
     const dispatch = useDispatch();
     const onChange = (e) => {
         setImage(e.target.files[0]);
@@ -25,11 +24,12 @@ export default function CreateProductScreen(props) {
         // submit that image to Cloudinary with an upload button and onClick={onSubmit} method
         const formData = new FormData(); // These keys are required by Cloudinary so, they must match exactly with the syntax above otherwise your upload will be failed.
         formData.append('file', image);
-        formData.append('upload_preset', preset);
+        formData.append('upload_preset', 'coreja3i');
         try {
-            // send a POST request to Cloudinary
+            // send a POST request to Cloudinarys
             const res = axios.post(url, formData); // await?
             // if it succeeds, we will get an imageUrl
+            //console.log(res);
             const imageUrl = res.data.secure_url;
             // send another POST request to server to create a product instance in the database
             dispatch(createProduct(name, price, imageUrl, description));
@@ -73,7 +73,6 @@ export default function CreateProductScreen(props) {
                         id="image"
                         type="file"
                         placeholder="Select an image"
-                        value={image}
                         onChange={onChange}
                         required
                         multiple
