@@ -39,13 +39,13 @@ productRouter.post(
   '/post',
   expressAsyncHandler(async (req, res) => {
     // create a new instance of product
-    //res.send(req.data); 
+    res.send(req.data); 
     if (!req.body){
       return res.status(400).send('Request body is missing');
     }
     const product = new Product({
       name: req.body.name,
-      images: req.body.images,
+      image: req.body.image,
       price: req.body.price,
       description: req.body.description,
     });

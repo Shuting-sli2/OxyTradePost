@@ -4,7 +4,6 @@ import { createProduct } from '../actions/productActions';
 // import ImageUploader from "react-images-upload"; // https://github.com/JakeHartnell/react-images-upload
 import { initializeApp } from 'firebase/app';
 
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
     apiKey: "AIzaSyADmD_z94mkhYsHjo9PXF7oCIuJG4YBC0w",
     authDomain: "oxytradepost-image-upload.firebaseapp.com",
@@ -32,9 +31,6 @@ export default function CreateProductScreen(props) {
         dispatch(createProduct(name, price, image, description));
     };
     console.log('image: ', image);
-    const handleUpload = () => {
-    }
-
     return (
         <div>
             <form className="form" onSubmit={submitHandler}>
@@ -70,7 +66,7 @@ export default function CreateProductScreen(props) {
                         type="file"
                         placeholder="Select an image"
                         value={image}
-                        onChange={(e) => setImage(e.target.file[0])}
+                        onChange={(e) => setImage(e.target.value)}
                         required
                     ></input>
                 </div>
