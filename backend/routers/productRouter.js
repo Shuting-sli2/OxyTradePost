@@ -47,13 +47,13 @@ productRouter.post(
     if (!req.body){
       return res.status(400).send('Request body is missing');
     }
-    //console.log(req.body);
+    console.log(req.body);
     const product = new Product({
       name: req.body.name,
       imageUrl: req.body.imageUrl, 
       price: req.body.price,
       description: req.body.description,
-      seller: req.user._id
+      seller: req.body.userid
     });
     // insert the product into the database
     const newProduct = await product.save(); //this.save() might not be working
@@ -62,7 +62,7 @@ productRouter.post(
       imageUrl: newProduct.imageUrl,
       price: newProduct.price,
       description: newProduct.description,
-      seller: newProduct.user._id
+      seller: newProduct.seller
     });
   }))
 
