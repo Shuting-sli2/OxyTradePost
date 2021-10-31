@@ -42,7 +42,7 @@ productRouter.post(
     if (!req.body){
       return res.status(400).send('Request body is missing');
     }
-    console.log(req.body);
+    //console.log(req.body);
     const product = new Product({
       name: req.body.name,
       imageUrl: req.body.imageUrl, 

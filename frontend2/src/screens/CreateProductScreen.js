@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createProduct } from '../actions/productActions';
 import axios from 'axios';
@@ -15,6 +15,10 @@ export default function CreateProductScreen(props) {
     const [description, setDescription] = useState('');
     const [image, setImage] = useState('');
     const dispatch = useDispatch();
+
+    const productCreated = useSelector((state) => state.productCreate);
+    const { productInfo } = productCreated;
+
     const onChange = (e) => {
         setImage(e.target.files[0]);
     }
@@ -32,38 +36,33 @@ export default function CreateProductScreen(props) {
                 .then((result) => {
                     // console.log(result.data.secure_url);
                     var imageUrl = result.data.secure_url;
-                    console.log(imageUrl);
-                    // const data = dispatch(createProduct(name, price, imageUrl, description));
+                    // console.log(imageUrl);
+                    dispatch(createProduct(name, price, imageUrl, description));
+                    console.log("productInfo: ", productInfo); // product undefined
+                    setImage(productInfo.imageUrl);
+                    /*
                     axios.post(
                         '/api/products/post',
-                        {name, price, imageUrl, description}
-                    ).then((data)=>{
+                        { name, price, imageUrl, description }
+                    ).then((data) => {
                         console.log("imageUrl from server api: ", data.data.imageUrl);
                         setImage(data.data.imageUrl);
                     })
+                    */
                 })
                 .catch((err) => {
                     console.log(err);
                 })
-            // setImage(image.data); 
-            // image.data returned by database
-            // display image in the webpage
-            // how to get data from dispatch?
-            // store?
-            // understand the data workflow after action get dispatched
-            // how to use data sent back from server?
         } catch (err) {
             console.error(err);
         }
     }
-
-    // useSelector: // Allows you to extract data from the Redux store state, using a selector function.
-    const productCreate = useSelector((state) => state.productCreate);
-    const { productInfo, loading, error } = productCreate;
-    console.log("product info: ", productInfo);
-    console.log("loading", loading);
-    console.log("error", error);
-    // setImage(productCreate.data);
+    // redirect
+    useEffect(() => {
+        if (productInfo) {
+            props.history.push('/');
+          }
+    }, [productInfo, props.history]);
 
     return (
         <div>

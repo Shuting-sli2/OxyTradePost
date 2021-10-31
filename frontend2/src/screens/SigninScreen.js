@@ -22,6 +22,13 @@ export default function SigninScreen(props) {
     : '/';
   const userSignin = useSelector((state) => state.userSignin);
   const {userInfo, loading, error} = userSignin; 
+  // console.log(userInfo); 
+  /* data sent by signin router server
+  _id: user._id,
+          name: user.name,
+          email: user.email,
+          token: generateToken(user),
+  */
   useEffect(() => {
     if (userInfo) {
       props.history.push(redirect);

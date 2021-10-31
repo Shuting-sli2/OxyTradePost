@@ -7,7 +7,7 @@ import {
 } from './reducers/productReducers';
 import { userRegisterReducer, userSigninReducer } from './reducers/userReducers';
 
-// understand localStorage
+// localStorage does not clear data when the browser closes
 const initialState = {
   userSignin: {
     userInfo: localStorage.getItem('userInfo')
@@ -17,10 +17,10 @@ const initialState = {
 };
 
 const reducer = combineReducers({
-  productList: productListReducer,
-  productDetails: productDetailsReducer,
   userSignin: userSigninReducer,
   userRegister: userRegisterReducer,
+  productList: productListReducer,
+  productDetails: productDetailsReducer,
   productCreate: productCreateReducer,
 });
 

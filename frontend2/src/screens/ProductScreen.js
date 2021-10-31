@@ -8,12 +8,15 @@ import MessageBox from '../components/MessageBox';
 export default function ProductScreen(props) {
     const dispatch = useDispatch();
     const productId = props.match.params.id;
-    const productDetails = useSelector((state) => state.productDetails);
-    const { loading, error, product } = productDetails;
   
     useEffect(() => {
       dispatch(detailsProduct(productId));
     }, [dispatch, productId]);
+
+    const productDetails = useSelector((state) => state.productDetails);
+    const { loading, error, product } = productDetails;
+    // product: product object sent by productRouter
+    // console.log(product);
     
     return (
         <div>
