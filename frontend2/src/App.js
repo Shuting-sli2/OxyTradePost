@@ -8,6 +8,7 @@ import ProductScreen from './screens/ProductScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import SigninScreen from './screens/SigninScreen';
 import CreateProductScreen from './screens/CreateProductScreen';
+import PostListScreen from './screens/PostListScreen';
 
 /* https://www.youtube.com/watch?v=TRCDsB9i3bI&t=2545s */
 /* make changes */
@@ -43,7 +44,7 @@ function App() {
                       </Link>
                     </li>
                     <li>
-                      <Link to="/productlist/seller">Products</Link>
+                      <Link to="/postlist">My Posts</Link>
                     </li>
                   </ul>
                 </div>
@@ -59,6 +60,7 @@ function App() {
           <Route path="/signin" component={SigninScreen}></Route>
           <Route path="/post" component={CreateProductScreen}></Route>
           <Route path="/register" component={RegisterScreen}></Route>
+          <Route path="/postlist" component={PostListScreen}></Route>
         </main>
         <footer className="row center">All right reserved</footer>
       </div>

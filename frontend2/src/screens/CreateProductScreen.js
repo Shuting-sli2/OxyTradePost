@@ -19,6 +19,9 @@ export default function CreateProductScreen(props) {
     const productCreated = useSelector((state) => state.productCreate);
     const { productInfo } = productCreated;
 
+    const userSignin = useSelector((state) => state.userSignin);
+    const { userInfo } = userSignin;
+
     const onChange = (e) => {
         setImage(e.target.files[0]);
     }
@@ -37,8 +40,8 @@ export default function CreateProductScreen(props) {
                     // console.log(result.data.secure_url);
                     var imageUrl = result.data.secure_url;
                     // console.log(imageUrl);
-                    dispatch(createProduct(name, price, imageUrl, description));
-                    console.log("productInfo: ", productInfo); // product undefined
+                    dispatch(createProduct(name, price, imageUrl, description, userInfo._id));
+                    // console.log("productInfo: ", productInfo); // product undefined
                     setImage(productInfo.imageUrl);
                     /*
                     axios.post(
@@ -61,7 +64,7 @@ export default function CreateProductScreen(props) {
     useEffect(() => {
         if (productInfo) {
             props.history.push('/');
-          }
+        }
     }, [productInfo, props.history]);
 
     return (

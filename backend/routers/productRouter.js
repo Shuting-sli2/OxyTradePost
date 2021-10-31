@@ -8,6 +8,11 @@ const productRouter = express.Router();
 productRouter.get(
   '/',
   expressAsyncHandler(async (req, res) => {
+    /*
+    const seller = req.query.seller || '';
+    const sellerFilter = seller ? { seller } : {};
+    const products = await Product.find({ ...sellerFilter });
+    */
     const products = await Product.find({});
     res.send(products);
   })
@@ -48,6 +53,7 @@ productRouter.post(
       imageUrl: req.body.imageUrl, 
       price: req.body.price,
       description: req.body.description,
+      seller: req.user._id
     });
     // insert the product into the database
     const newProduct = await product.save(); //this.save() might not be working
@@ -56,6 +62,7 @@ productRouter.post(
       imageUrl: newProduct.imageUrl,
       price: newProduct.price,
       description: newProduct.description,
+      seller: newProduct.user._id
     });
   }))
 

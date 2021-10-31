@@ -11,12 +11,12 @@ import {
   PRODUCT_LIST_SUCCESS,
 } from '../constants/productConstants';
 
-export const listProducts = () => async (dispatch) => {
+export const listProducts = ({ seller = '' }) => async (dispatch) => {
   dispatch({
     type: PRODUCT_LIST_REQUEST,
   });
   try {
-    const { data } = await Axios.get('/api/products');
+    const { data } = await Axios.get(`/api/products?seller=${seller}`);
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: PRODUCT_LIST_FAIL, payload: error.message });
@@ -38,15 +38,15 @@ export const detailsProduct = (productId) => async (dispatch) => {
   }
 };
 
-export const createProduct = (name, price, imageUrl, description) => async (dispatch) => {
-  dispatch({ type: PRODUCT_CREATE_REQUEST, payload: { name, price, imageUrl, description } });
+export const createProduct = (name, price, imageUrl, description, userid) => async (dispatch) => {
+  dispatch({ type: PRODUCT_CREATE_REQUEST, payload: { name, price, imageUrl, description, userid } });
   try {
     const { data } = await Axios.post(
       '/api/products/post',
-      { name, price, imageUrl, description }
+      { name, price, imageUrl, description, userid }
     );
     // console.log('before adding data to store: ', data);
-    dispatch({ type: PRODUCT_CREATE_SUCCESS, payload: data});
+    dispatch({ type: PRODUCT_CREATE_SUCCESS, payload: data });
     // console.log('after adding data to store: ', data);
   } catch (error) {
     // console.log('error');
