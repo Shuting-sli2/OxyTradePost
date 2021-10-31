@@ -19,12 +19,14 @@ export default function PostListScreen(props) {
     };
     */
 
+    console.log("userInfo._id: ", userInfo._id); //correct
+    
     // also need to dispatch listProducts when product is created/deleted
     useEffect(() => {
         dispatch(listProducts({ seller: userInfo._id }));
     }, [dispatch, props.history, userInfo._id]);
     // [createdProduct,dispatch,props.history,sellerMode,successCreate,successDelete,userInfo._id]
-
+    console.log(products);
     return (
         <div>
             <div className="row">

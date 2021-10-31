@@ -41,7 +41,7 @@ productRouter.get(
 
 // create a post API: insert a product instance into the database
 productRouter.post(
-  '/post',
+  '/',
   expressAsyncHandler(async (req, res) => {
     // create a new instance of product
     if (!req.body){

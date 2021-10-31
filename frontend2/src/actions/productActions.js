@@ -12,11 +12,13 @@ import {
 } from '../constants/productConstants';
 
 export const listProducts = ({ seller = '' }) => async (dispatch) => {
+  console.log("seller id in listProducts: ", seller);
   dispatch({
     type: PRODUCT_LIST_REQUEST,
   });
   try {
     const { data } = await Axios.get(`/api/products?seller=${seller}`);
+    console.log("product w/ specific seller data: ", data);
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: PRODUCT_LIST_FAIL, payload: error.message });
@@ -42,14 +44,11 @@ export const createProduct = (name, price, imageUrl, description, userid) => asy
   dispatch({ type: PRODUCT_CREATE_REQUEST, payload: { name, price, imageUrl, description, userid} });
   try {
     const { data } = await Axios.post(
-      '/api/products/post',
+      '/api/products',
       { name, price, imageUrl, description, userid }
     );
-    // console.log('before adding data to store: ', data);
     dispatch({ type: PRODUCT_CREATE_SUCCESS, payload: data });
-    // console.log('after adding data to store: ', data);
   } catch (error) {
-    // console.log('error');
     const message =
       error.response && error.response.data.message
         ? error.response.data.message
