@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { listProducts } from '../actions/productActions';
+import { listProducts, deleteProduct } from '../actions/productActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
+import { PRODUCT_CREATE_RESET, PRODUCT_DELETE_RESET } from '../constants/productConstants';
 
 export default function PostListScreen(props) {
     const productList = useSelector((state) => state.productList);
@@ -10,23 +11,34 @@ export default function PostListScreen(props) {
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
     const dispatch = useDispatch();
+    const productDelete = useSelector((state) => state.productDelete);
+    const { successDelete } = productDelete;
 
-    /*
+    const productCreate = useSelector((state) => state.productCreate);
+    const {
+        successCreate,
+    } = productCreate;
+
     const deleteHandler = (product) => {
         if (window.confirm('Are you sure to delete?')) {
-          dispatch(deleteProduct(product._id));
+            dispatch(deleteProduct(product._id));
         }
     };
-    */
 
-    console.log("userInfo._id: ", userInfo._id); //correct
-    
+    // console.log("userInfo._id: ", userInfo._id); 
     // also need to dispatch listProducts when product is created/deleted
     useEffect(() => {
+        if (successCreate) {
+            // ????: what does PRODUCT_CREATE_RESET Action do? 
+            // dispatch({ type: PRODUCT_CREATE_RESET });
+          }
+        if (successDelete) {
+            dispatch({ type: PRODUCT_DELETE_RESET });
+        }
         dispatch(listProducts({ seller: userInfo._id }));
-    }, [dispatch, props.history, userInfo._id]);
-    // [createdProduct,dispatch,props.history,sellerMode,successCreate,successDelete,userInfo._id]
-    console.log(products);
+        // push to refresh page
+    }, [dispatch, props.history, userInfo._id, successDelete, successCreate]);
+    // console.log(products);
     return (
         <div>
             <div className="row">
@@ -56,7 +68,7 @@ export default function PostListScreen(props) {
                                     <button
                                         type="button"
                                         className="small"
-                                        // onClick={() => deleteHandler(product)}
+                                        onClick={() => deleteHandler(product)}
                                     >Delete
                                     </button>
                                 </td>

@@ -8,12 +8,10 @@ const productRouter = express.Router();
 productRouter.get(
   '/',
   expressAsyncHandler(async (req, res) => {
-    /*
     const seller = req.query.seller || '';
     const sellerFilter = seller ? { seller } : {};
     const products = await Product.find({ ...sellerFilter });
-    */
-    const products = await Product.find({});
+    // console.log("get products API"); 
     res.send(products);
   })
 );
@@ -23,6 +21,7 @@ productRouter.get(
   expressAsyncHandler(async (req, res) => {
     await Product.remove({});
     const createdProducts = await Product.insertMany(data.products);
+    // console.log("get product seed API"); 
     res.send({ createdProducts });
   })
 );
@@ -31,6 +30,7 @@ productRouter.get(
   '/:id',
   expressAsyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
+    // console.log("get product by id API"); 
     if (product) {
       res.send(product);
     } else {
@@ -38,6 +38,7 @@ productRouter.get(
     }
   })
 );
+
 
 // create a post API: insert a product instance into the database
 productRouter.post(
@@ -65,5 +66,19 @@ productRouter.post(
       seller: newProduct.seller
     });
   }))
+
+
+  productRouter.delete(
+    '/:id',
+    expressAsyncHandler(async (req, res) => {
+      const product = await Product.findById(req.params.id);
+      if (product) {
+        const deleteProduct = await product.remove();
+        res.send({ message: 'Product Deleted', product: deleteProduct });
+      } else {
+        res.status(404).send({ message: 'Product Not Found' });
+      }
+    })
+  );
 
 export default productRouter;

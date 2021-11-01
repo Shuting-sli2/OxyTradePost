@@ -4,8 +4,9 @@ import {
   productDetailsReducer,
   productListReducer,
   productCreateReducer,
+  productDeleteReducer,
 } from './reducers/productReducers';
-import { userRegisterReducer, userSigninReducer } from './reducers/userReducers';
+import { userRegisterReducer, userSigninReducer} from './reducers/userReducers';
 
 // localStorage does not clear data when the browser closes
 const initialState = {
@@ -22,6 +23,7 @@ const reducer = combineReducers({
   productList: productListReducer,
   productDetails: productDetailsReducer,
   productCreate: productCreateReducer,
+  productDelete: productDeleteReducer,
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
