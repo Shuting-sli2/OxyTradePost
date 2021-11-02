@@ -8,23 +8,16 @@ import MessageBox from '../components/MessageBox';
 export default function ProductScreen(props) {
   const dispatch = useDispatch();
   const productId = props.match.params.id;
-
+  
   useEffect(() => {
     dispatch(detailsProduct(productId));
   }, [dispatch, productId]);
+
 
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
   // product: product object sent by productRouter
   // console.log(product);
-  const userSignin = useSelector((state) => state.userSignin);
-  const { userInfo } = userSignin;
-  useEffect(() => {
-    if (!userInfo) {
-      props.history.push('/');
-    }
-  }, [props.history, userInfo]);
-
   return (
     <div>
       {loading ? (
@@ -60,6 +53,7 @@ export default function ProductScreen(props) {
         </div>
       )}
     </div>
-
   );
+
+
 }
