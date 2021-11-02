@@ -20,7 +20,7 @@ export default function ProductScreen(props) {
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   useEffect(() => {
-    if (userInfo) {
+    if (!userInfo) {
       props.history.push('/');
     }
   }, [props.history, userInfo]);
