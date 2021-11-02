@@ -15,14 +15,11 @@ import {
 } from '../constants/productConstants';
 
 export const listProducts = ({ seller = '' }) => async (dispatch) => {
-  //console.log("seller id in listProducts: ", seller);
   dispatch({
     type: PRODUCT_LIST_REQUEST,
   });
   try {
     const { data } = await Axios.get(`/api/products?seller=${seller}`);
-    // console.log("product w/ specific seller data: ", data);
-    // why response returns all data?
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: PRODUCT_LIST_FAIL, payload: error.message });

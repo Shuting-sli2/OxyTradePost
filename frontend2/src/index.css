@@ -100,6 +100,12 @@ a.brand {
 .row.center {
   justify-content: center;
 }
+.vertical.center{
+  height: 100px;
+  line-height: 100px;
+  text-align: center;
+  border: 2px dashed #f69c55;
+}
 .row.top{
   align-items: flex-start;
 }

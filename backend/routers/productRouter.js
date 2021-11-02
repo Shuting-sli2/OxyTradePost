@@ -11,7 +11,6 @@ productRouter.get(
     const seller = req.query.seller || '';
     const sellerFilter = seller ? { seller } : {};
     const products = await Product.find({ ...sellerFilter });
-    // console.log("get products API"); 
     res.send(products);
   })
 );

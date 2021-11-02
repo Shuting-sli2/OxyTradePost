@@ -6,6 +6,7 @@ import { signout } from './actions/userActions';
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
 import RegisterScreen from './screens/RegisterScreen';
+import WelcomeScreen from './screens/WelcomeScreen';
 import SigninScreen from './screens/SigninScreen';
 import CreateProductScreen from './screens/CreateProductScreen';
 import PostListScreen from './screens/PostListScreen';
@@ -24,17 +25,17 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="grid-container">
-        <header className="row">
-          <div>
-            <a className="brand" href="/">
-              OxyTradePost
-            </a>
-          </div>
-          <Link to="/post">Post an Item</Link>
-          <div>
-            {
-              userInfo ? (
+      {
+        userInfo ? (
+          <div className="grid-container">
+            <header className="row">
+              <div>
+                <a className="brand" href="/">
+                  OxyTradePost
+                </a>
+              </div>
+              <Link to="/post">Post an Item</Link>
+              <div>
                 <div className="dropdown">
                   <Link to="#">{userInfo.name} <i className="fa fa-caret-down"></i> </Link>
                   <ul className="dropdown-content">
@@ -48,22 +49,40 @@ function App() {
                     </li>
                   </ul>
                 </div>
-              ) : (
-                <Link to="/signin">Sign In</Link>
-              )
-            }
+              </div>
+            </header>
+            <main>
+              <Route path="/product/:id" component={ProductScreen} exact></Route>
+              <Route path="/" component={HomeScreen} exact></Route>
+              <Route path="/signin" component={SigninScreen}></Route>
+              <Route path="/post" component={CreateProductScreen}></Route>
+              <Route path="/register" component={RegisterScreen}></Route>
+              <Route path="/postlist" component={PostListScreen}></Route>
+            </main>
+            <footer className="row center">All right reserved</footer>
           </div>
-        </header>
-        <main>
-          <Route path="/product/:id" component={ProductScreen} exact></Route>
-          <Route path="/" component={HomeScreen} exact></Route>
-          <Route path="/signin" component={SigninScreen}></Route>
-          <Route path="/post" component={CreateProductScreen}></Route>
-          <Route path="/register" component={RegisterScreen}></Route>
-          <Route path="/postlist" component={PostListScreen}></Route>
-        </main>
-        <footer className="row center">All right reserved</footer>
-      </div>
+        ) : (
+
+          <div className="grid-container">
+            <header className="row">
+              <div>
+                <a className="brand" href="/">
+                  OxyTradePost
+                </a>
+              </div>
+              <Link to="/signin">Sign In</Link>
+              <Link to="/register">Register</Link>
+            </header>
+            <main>
+              <Route path="/" component={WelcomeScreen} exact></Route>
+              <Route path="/signin" component={SigninScreen}></Route>
+              <Route path="/register" component={RegisterScreen}></Route>
+            </main>
+            <footer className="row center">All right reserved</footer>
+          </div>
+
+        )
+      }
     </BrowserRouter>
   );
 }

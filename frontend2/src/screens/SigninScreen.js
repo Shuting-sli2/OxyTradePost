@@ -12,11 +12,11 @@ export default function SigninScreen(props) {
   const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();// prevent page refresh after user submits the form
-    // constant, action, reducer, store
     dispatch(signin(email, password));
   };
 
-  // redirect user to shipping page or homepage
+  // redirect user to where they want to be directed or homescreen
+  // ex. signin?redirect=shipping
   const redirect = props.location.search
     ? props.location.search.split('=')[1]
     : '/';

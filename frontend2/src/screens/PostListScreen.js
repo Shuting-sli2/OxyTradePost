@@ -24,21 +24,19 @@ export default function PostListScreen(props) {
             dispatch(deleteProduct(product._id));
         }
     };
-
     // console.log("userInfo._id: ", userInfo._id); 
     // also need to dispatch listProducts when product is created/deleted
     useEffect(() => {
         if (successCreate) {
             // ????: what does PRODUCT_CREATE_RESET Action do? 
-            // dispatch({ type: PRODUCT_CREATE_RESET });
+            dispatch({ type: PRODUCT_CREATE_RESET });
           }
         if (successDelete) {
             dispatch({ type: PRODUCT_DELETE_RESET });
         }
         dispatch(listProducts({ seller: userInfo._id }));
-        // push to refresh page
-    }, [dispatch, props.history, userInfo._id, successDelete, successCreate]);
-    // console.log(products);
+    }, [dispatch, userInfo._id, successDelete, successCreate]);
+
     return (
         <div>
             <div className="row">
