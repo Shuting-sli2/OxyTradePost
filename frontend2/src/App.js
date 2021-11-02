@@ -62,7 +62,6 @@ function App() {
             <footer className="row center">All right reserved</footer>
           </div>
         ) : (
-
           <div className="grid-container">
             <header className="row">
               <div>
@@ -82,7 +81,6 @@ function App() {
             </main>
             <footer className="row center">All right reserved</footer>
           </div>
-
         )
       }
     </BrowserRouter>
