@@ -30,12 +30,13 @@ export default function PostListScreen(props) {
         if (successCreate) {
             // ????: what does PRODUCT_CREATE_RESET Action do? 
             dispatch({ type: PRODUCT_CREATE_RESET });
-          }
+        }
         if (successDelete) {
             dispatch({ type: PRODUCT_DELETE_RESET });
         }
         dispatch(listProducts({ seller: userInfo._id }));
     }, [dispatch, userInfo._id, successDelete, successCreate]);
+
 
     return (
         <div>

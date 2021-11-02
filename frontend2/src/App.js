@@ -70,13 +70,15 @@ function App() {
                   OxyTradePost
                 </a>
               </div>
+              <div >
               <Link to="/signin">Sign In</Link>
               <Link to="/register">Register</Link>
+              </div>
             </header>
             <main>
               <Route path="/" component={WelcomeScreen} exact></Route>
-              <Route path="/signin" component={SigninScreen}></Route>
-              <Route path="/register" component={RegisterScreen}></Route>
+              <Route path="/signin" component={SigninScreen} exact></Route>
+              <Route path="/register" component={RegisterScreen} exact></Route>
             </main>
             <footer className="row center">All right reserved</footer>
           </div>
