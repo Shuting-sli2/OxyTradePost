@@ -6,6 +6,8 @@ import dotenv from 'dotenv';
 import userRouter from './routers/userRouter.js';
 import productRouter from './routers/productRouter.js';
 import cors from 'cors';
+import http from 'http';
+import {Server, Socket} from 'socket.io'; 
 
 dotenv.config();
 const app = express();
@@ -34,6 +36,9 @@ app.use((err, req, res, next) => {
 });
 const port = process.env.PORT || 5000;
 
-app.listen(port, () => {
+
+var server = app.listen(port, () => {
   console.log(`Serve at http://localhost:${port}`);
 });
+const io = new Server(server);
+
