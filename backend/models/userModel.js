@@ -5,10 +5,11 @@ const userSchema = new mongoose.Schema(
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    isAdmin: { type: Boolean, default: false, required: true },
   },
   {
-    timestamps: true,
+    timestamps: true, 
+    // by setting timestamp to true, it adds two more attributes
+    // created time + updated time
   }
 );
 const User = mongoose.model('User', userSchema);

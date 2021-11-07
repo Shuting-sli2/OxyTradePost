@@ -3,9 +3,12 @@ import thunk from 'redux-thunk';
 import {
   productDetailsReducer,
   productListReducer,
+  productCreateReducer,
+  productDeleteReducer,
 } from './reducers/productReducers';
-import { userSigninReducer } from './reducers/userReducers';
+import { userRegisterReducer, userSigninReducer} from './reducers/userReducers';
 
+// localStorage does not clear data when the browser closes
 const initialState = {
   userSignin: {
     userInfo: localStorage.getItem('userInfo')
@@ -13,12 +16,18 @@ const initialState = {
       : null,
   },
 };
+
 const reducer = combineReducers({
+  userSignin: userSigninReducer,
+  userRegister: userRegisterReducer,
   productList: productListReducer,
   productDetails: productDetailsReducer,
-  userSignin: userSigninReducer,
+  productCreate: productCreateReducer,
+  productDelete: productDeleteReducer,
 });
+
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 const store = createStore(
   reducer,
   initialState,

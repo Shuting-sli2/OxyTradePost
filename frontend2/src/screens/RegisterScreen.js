@@ -1,34 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { signin } from '../actions/userActions';
+import { register } from '../actions/userActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
-export default function SigninScreen(props) {
+export default function RegisterScreen(props) {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState(''); // setPassword is called in input tag: onChange={(e) => setPassword(e.target.value)}
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
+  // state.userRegister is defined in store.js
   const dispatch = useDispatch();
   const submitHandler = (e) => {
-    e.preventDefault();// prevent page refresh after user submits the form
-    dispatch(signin(email, password));
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      alert('Password and confirm password are not match')
+    } else {
+      dispatch(register(name, email, password));
+    }
   };
 
-  // redirect user to where they want to be directed or homescreen
-  // ex. signin?redirect=shipping
+  // redirect to a page when user finishes registration
   const redirect = props.location.search
     ? props.location.search.split('=')[1]
     : '/';
-  const userSignin = useSelector((state) => state.userSignin);
-  const {userInfo, loading, error} = userSignin; 
-  // console.log(userInfo); 
-  /* data sent by signin router server
-  _id: user._id,
-          name: user.name,
-          email: user.email,
-          token: generateToken(user),
-  */
+  const userRegister = useSelector((state) => state.userRegister);
+  const { userInfo, loading, error } = userRegister;
+  // userInfo (object): id, name, email, token
+  // console.log(userInfo);
   useEffect(() => {
     if (userInfo) {
       props.history.push(redirect);
@@ -39,10 +40,20 @@ export default function SigninScreen(props) {
     <div>
       <form className="form" onSubmit={submitHandler}>
         <div>
-          <h1>Sign In</h1>
+          <h1>Register</h1>
         </div>
         {loading && <LoadingBox></LoadingBox>}
-        {error && <MessageBox variant = "danger">{error}</MessageBox>}
+        {error && <MessageBox variant="danger">{error}</MessageBox>}
+        <div>
+          <label htmlFor="name">Name</label>
+          <input
+            type="text"
+            id="name"
+            placeholder="Enter name"
+            required
+            onChange={(e) => setName(e.target.value)}
+          ></input>
+        </div>
         <div>
           <label htmlFor="email">Email address</label>
           <input
@@ -64,15 +75,25 @@ export default function SigninScreen(props) {
           ></input>
         </div>
         <div>
+          <label htmlFor="confirmPassword">Confirm Password</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            placeholder="Enter confirm password"
+            required
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          ></input>
+        </div>
+        <div>
           <label />
           <button className="primary" type="submit">
-            Sign In
+            Register
           </button>
         </div>
         <div>
           <label />
           <div>
-            New customer? <Link to={`/register?redirect=${redirect}`}>Create your account</Link>
+            Already have an account? <Link to={`/signin?redirect=${redirect}`}>Sign-In</Link>
           </div>
         </div>
       </form>
