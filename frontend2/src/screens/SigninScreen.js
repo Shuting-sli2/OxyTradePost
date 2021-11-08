@@ -22,6 +22,9 @@ export default function SigninScreen(props) {
     : '/';
   const userSignin = useSelector((state) => state.userSignin);
   const {userInfo, loading, error} = userSignin; 
+  // dispatch(getTalkSession)
+
+
   // console.log(userInfo); 
   /* data sent by signin router server
   _id: user._id,
