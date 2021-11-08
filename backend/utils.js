@@ -1,6 +1,8 @@
 import jwt from 'jsonwebtoken';
 import * as Talk from 'talkjs'; //npm install talkjs --save // install the TalkJS JavaScript SDK
 
+
+// localStorage saves userInfo when browser is closed and reopened.
 export const generateToken = (user) => {
   return jwt.sign(
     {
@@ -15,6 +17,9 @@ export const generateToken = (user) => {
   );
 };
 
+// TalkJS guide:
+// https://talkjs.com/resources/add-buyer-seller-chat-into-a-marketplace-with-react/
+
 // TalkUtils: return TalkUser instance
 // Change this to your actual AppId which can be
 // found in the TalkJS dashboard.
@@ -27,7 +32,7 @@ export async function createTalkUser(user) {
          });
 }
 
-// Session Initialization
+// Session Initialize
 const sessionDeferred = new Deferred();
 export async function initialize(user) {
     await Talk.ready;
@@ -42,7 +47,7 @@ export function get(){
 
 /*
 Call its initialization in TWO places: 
-  1) the application load (?)
+  1) the application load (?): localStorage
   2) after a successful login
 import * as talkSession from 'here';
 await talkSession.get();

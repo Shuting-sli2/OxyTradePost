@@ -9,10 +9,11 @@ import {
 import { userRegisterReducer, userSigninReducer} from './reducers/userReducers';
 
 // localStorage does not clear data when the browser closes
+// localStorage stores 'userInfo'
 const initialState = {
   userSignin: {
     userInfo: localStorage.getItem('userInfo')
-      ? JSON.parse(localStorage.getItem('userInfo'))
+      ? JSON.parse(localStorage.getItem('userInfo')) 
       : null,
   },
 };

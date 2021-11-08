@@ -4,7 +4,7 @@ import bcrypt from 'bcryptjs';
 import data from '../data.js';
 import User from '../models/userModel.js';
 import { generateToken } from '../utils.js';
-import { talkSession } from '../utils.js';
+import { initialize } from '../utils.js';
 
 const userRouter = express.Router();
 
@@ -30,7 +30,7 @@ userRouter.post(
           name: user.name,
           email: user.email,
           token: generateToken(user),
-          // session: await talkSession.get();
+          // session: initialize(user);
         });
         return;
       }

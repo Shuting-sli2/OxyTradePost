@@ -15,7 +15,7 @@ export const signin = (email, password) => async (dispatch) => {
   try {
     const { data } = await Axios.post('/api/users/signin', { email, password });
     dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
-    localStorage.setItem('userInfo', JSON.stringify(data)); //save user signin infor so that the information is still there when the user closes and reopens the browser
+    localStorage.setItem('userInfo', JSON.stringify(data)); //save user signin info so that the information is still there when the user closes and reopens the browser
   } catch (error) {
     dispatch({
       type: USER_SIGNIN_FAIL,
