@@ -27,28 +27,27 @@ export const appId = 'tpo5lj4E';
 export async function createTalkUser(user) {
     await Talk.ready;
     return new Talk.User({
-            id: user.id,
-            name: user.username
+            id: user._id,
+            name: user.name
          });
 }
-
 // Session Initialize
 const sessionDeferred = new Deferred();
-export async function initialize(user) {
+export async function talkSessionInitialize(user) {
     await Talk.ready;
     sessionDeferred.resolve(new Talk.Session({
         appId: appId,
         me: await createTalkUser(user)
     }));
 }
-export function get(){
+export function talkSessionGet(){
     return sessionDeferred.promise;
 }
 
 /*
-Call its initialization in TWO places: 
-  1) the application load (?): localStorage
-  2) after a successful login
-import * as talkSession from 'here';
-await talkSession.get();
+Session Initialization:
+  Two scenarios where session initialization is needed:
+    1. successful user log in 
+    2. Application load
+        => save session data in userInfo in localStorage
 */
