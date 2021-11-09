@@ -4,7 +4,7 @@ import bcrypt from 'bcryptjs';
 import data from '../data.js';
 import User from '../models/userModel.js';
 import { generateToken } from '../utils.js';
-import { talkSessionInitialize, talkSessionGet } from '../utils.js';
+import { talkSessionInitialize} from '../utils.js';
 
 const userRouter = express.Router();
 
@@ -25,15 +25,15 @@ userRouter.post(
     const user = await User.findOne({ email: req.body.email });
     if (user) {
       if (bcrypt.compareSync(req.body.password, user.password)) {
-        talkSessionInitialize(user);
+        console.log("after session initialization");
         res.send({
           _id: user._id,
           name: user.name,
           email: user.email,
           token: generateToken(user),
-          session: await talkSessionGet()
+          session: talkSessionInitialize(user)
         });
-        console.log('signin API response: ', res); 
+        // console.log('signin API response: ', res.session); 
         // check token
         // check session
         return;
@@ -55,13 +55,12 @@ userRouter.post(
     // calling save() makes Mongoose insert a new document
     if (req.body.email.endsWith("@oxy.edu")){
       const createdUser = await user.save();
-      talkSessionInitialize(user);
       res.send({
         _id: createdUser._id,
         name: createdUser.name,
         email: createdUser.email,
         token: generateToken(createdUser),
-        session: await talkSessionGet() 
+        session: talkSessionInitialize(user)
       });
     }
     res.status(401).send({ message: 'Invalid Oxy email.' }); // set loading to false & write error message
