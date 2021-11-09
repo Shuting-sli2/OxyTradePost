@@ -33,7 +33,7 @@ userRouter.post(
           token: generateToken(user),
           session: talkSessionInitialize(user)
         });
-        // console.log('signin API response: ', res.session); 
+        // console.log('signin API res: ', res); 
         // check token
         // check session
         return;
