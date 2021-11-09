@@ -5,7 +5,9 @@ import { detailsProduct } from '../actions/productActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
+
 export default function ProductScreen(props) {
+  
   const dispatch = useDispatch();
   const productId = props.match.params.id;
   
@@ -27,6 +29,8 @@ export default function ProductScreen(props) {
       ) : (
         <div>
           <div className="row top">
+          <div className="col-1">
+            </div>
             <div className="col-2">
               <img
                 className="large"

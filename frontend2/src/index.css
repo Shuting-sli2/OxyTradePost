@@ -61,7 +61,7 @@ li{
   margin-top: 1rem;
 }
 button{
-  padding: 1rem;
+  padding: 0.6rem;
   border-radius: 0.5rem;
   border: 0.1rem #a4a4a4 solid; 
   font-size: 1.6rem;
@@ -120,12 +120,12 @@ img {
   border-radius: 0.5rem;
   height: auto;
   width: auto;
-  max-height: 25rem;
-  max-width: 25rem;
+  max-height: 27rem;
+  max-width: 27rem;
 }
 img.medium{
-  max-width: 29rem;
-  max-height: 29rem;
+  max-width: 22.5rem;
+  max-height: 22.5rem;
   height: auto;
   width: auto;
 }
@@ -140,12 +140,12 @@ img.large {
   border: 0.1rem #c0c0c0 solid;
   background-color: #f8f8f8;
   border-radius: 0.5rem;
-  margin: 1rem;
-  width: 320px;
-  height: 415px;
+  margin: 0.5rem;
+  width: 250px;
+  height: 330px;
 }
 .card-body {
-  padding: 1rem;
+  padding: 0.1rem;
 }
 .card-body > * {
   margin-bottom: 0.5rem;
@@ -210,4 +210,11 @@ img.large {
 }
 .dropdown:hover .dropdown-content {
   display: block;
+}
+th {
+  padding: 1rem;
+}
+td {
+  width: 120px;
+  text-align: center;
 }
