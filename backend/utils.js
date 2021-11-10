@@ -19,28 +19,53 @@ export const generateToken = (user) => {
 // TalkJS guide:
 // https://talkjs.com/resources/add-buyer-seller-chat-into-a-marketplace-with-react/
 
+
+/*
 // Session Initialize
 export async function talkSessionInitialize(user) {
+  // create a talkJS user
+  // synchronize user data with TalkJS, so we can display it inside the chat UI
   await Talk.ready;
   const me = new Talk.User({
     id: user._id,
-    name: user.name
+    name: user.name,
+    email: user.email,
   });
   const session = new Talk.Session({
-    appId: 'tpo5lj4E',
+    appId: 'tpo5lj4E', //replace YOUR_APP_ID with the appId found in the TalkJS dashboard
     me: me,
   });
   return session;
 }
-/*
-Session Initialization:
-  Two scenarios where session initialization is needed:
-    1. successful user log in
-    2. Application load
-        => save session data in userInfo in localStorage
-*/
 
-// create a conversationBuilder for a given session
+
+// create another user which we'll create a conversation with. 
+// For this example, we'll use a hardcoded dummy user
+
+var other = new Talk.User({
+  id: '654321',
+  name: 'Sebastian',
+  email: 'Sebastian@example.com',
+});
+
+// The getOrCreateConversation method attempts to get the conversation 
+// between the two users if it previously exists or create a new one otherwise. 
+var conversation = window.talkSession.getOrCreateConversation(
+  Talk.oneOnOneId(me, other)
+);
+conversation.setParticipant(me);
+conversation.setParticipant(other);
+
+
+// Create and Mount the Inbox
+// It shows a user's conversation history and it allows them to write messages.
+
+// create the Inbox
+var inbox = window.talkSession.createInbox({ selected: conversation });
+// call the Inbox mount method after creating the Inbox to make it visible on your app.
+const talkjsContainer = React.createRef();
+
+/*
 export async function getOrCreateConversation(session, currentUser, otherUser) {   
   const currentTalkUser = await new Talk.User({
     id: currentUser._id,
@@ -57,3 +82,4 @@ export async function getOrCreateConversation(session, currentUser, otherUser) {
   
   return conversationBuilder;
 }
+*/

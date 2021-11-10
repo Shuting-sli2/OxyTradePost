@@ -4,7 +4,7 @@ import bcrypt from 'bcryptjs';
 import data from '../data.js';
 import User from '../models/userModel.js';
 import { generateToken } from '../utils.js';
-import { talkSessionInitialize} from '../utils.js';
+// import { talkSessionInitialize} from '../utils.js';
 
 const userRouter = express.Router();
 
@@ -31,7 +31,7 @@ userRouter.post(
           name: user.name,
           email: user.email,
           token: generateToken(user),
-          session: talkSessionInitialize(user)
+          // session: talkSessionInitialize(user)
         });
         // console.log('signin API res: ', res); 
         // check token

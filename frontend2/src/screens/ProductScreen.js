@@ -5,21 +5,20 @@ import { detailsProduct } from '../actions/productActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
-
 export default function ProductScreen(props) {
-  
+
   const dispatch = useDispatch();
   const productId = props.match.params.id;
-  
+
   useEffect(() => {
     dispatch(detailsProduct(productId));
   }, [dispatch, productId]);
-
 
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
   // product: product object sent by productRouter
   // console.log(product);
+
   return (
     <div>
       {loading ? (
@@ -29,7 +28,7 @@ export default function ProductScreen(props) {
       ) : (
         <div>
           <div className="row top">
-          <div className="col-1">
+            <div className="col-1">
             </div>
             <div className="col-2">
               <img
