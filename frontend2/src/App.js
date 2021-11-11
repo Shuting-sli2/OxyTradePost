@@ -15,6 +15,8 @@ import PrivateRoute from './components/PrivateRoute';
 import AdminRoute from './components/AdminRoute';
 import SearchScreen from './components/SearchScreen';
 import SearchBox from './components/SearchBox';
+import SupportScreen from './screens/SupportScreen';
+import ChatBox from './components/ChatBox';
 
 /* https://www.youtube.com/watch?v=TRCDsB9i3bI&t=2545s */
 /* make changes */
@@ -54,6 +56,9 @@ function App() {
                     <li>
                       <Link to="/postlist">My Posts</Link>
                     </li>
+                    <li>
+                    <Link to="/support">Support</Link>
+                  </li>
                   </ul>
                 </div>
               ) : (
@@ -93,6 +98,7 @@ function App() {
               path="/profile"
               component={ProfileScreen}
             ></PrivateRoute>
+            <AdminRoute path="/support" component={SupportScreen}></AdminRoute>
           </main>
           <footer className="row center">All right reserved</footer>
         </div>

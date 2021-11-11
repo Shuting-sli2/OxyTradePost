@@ -29,6 +29,7 @@
     "mongoose": "^5.13.11",
     "react-images-upload": "^1.2.8",
     "socket.io": "^4.3.2",
+    "socket.io-client": "^4.3.2",
     "talkjs": "^0.15.0"
   },
   "devDependencies": {

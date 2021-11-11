@@ -53,14 +53,16 @@ io.on('connection', (socket) => {
       }
     }
   });
+
+  
   socket.on('onLogin', (user) => {
-    const updateUser = {
+    const updatedUser = {
       ...user,
       online: true,
-      socketId = socket.id,
-      message =[],
+      // socketId = socket.id,
+      // messages =[],
     };
-    const existUser = users.find((x) => x.id === updatedUser.id);
+    const existUser = users.find((x) => x._id === updatedUser._id);
     if (existUser) {
       existUser.socketId = socket.id;
       existUser.online = true;
@@ -78,6 +80,7 @@ io.on('connection', (socket) => {
       io.to(admin.socketId).emit('listUsers', users);
     }
   });
+  
 
   socket.on('onUserSelected', (user) => {
     const admin = users.find((x) => x.isAdmin && x.online);
@@ -112,8 +115,6 @@ io.on('connection', (socket) => {
       }
     } 
   });
-
-
 });
 
 /*
