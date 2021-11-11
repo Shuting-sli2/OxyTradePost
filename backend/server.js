@@ -36,11 +36,32 @@ app.use((err, req, res, next) => {
 });
 const port = process.env.PORT || 5000;
 
+// CREATE A SERVER
 const server = http.createServer(app);
-const io = new Server(server);
+const io = new Server(server); // socket io takes in the HTTP object
+const users = [];
+// Everything is event based.
+// SERVER SIDE
+// The first event: a connection between server and client
+  // have access to a web socket object & a callback
+    // then 2 things
+      // 1. listen to the message, socket.on
+      // 2. send back to the client: socket.send
+// CLIENT SIDE
+// listen to method: something like "socket.onmessage"
+// send messages, dealing with button etc.
+
+// socket io, main feature: server can broadcast message to multiple clients
+// 
+
+
+// connection between 
+  // socket id
+  // user id
 
 io.on('connection', (socket) => {
   console.log('connection', socket.id);
+  // we can call an event anything we want
   socket.on('disconnect', () => {
     const user = users.find((x) => x.socketId === socket.id);
     if (user) {
@@ -48,14 +69,16 @@ io.on('connection', (socket) => {
       console.log('Offline', user.name);
       const admin = users.find((x) => x.isAdmin && x.online);
       if (admin) {
+        // disconnect user by updateUser with online status changed to false
         io.to(admin.socketId).emit('updateUser', user);
       }
     }
   });
+  // login event takes user as parameter
   socket.on('onLogin', (user) => {
     const updatedUser = {
-      ...user,
-      online: true,
+      ...user, // super user attributes
+      online: true, // user.online attribute is common essentials
       socketId: socket.id,
       messages: [],
     };
@@ -64,14 +87,16 @@ io.on('connection', (socket) => {
       existUser.socketId = socket.id;
       existUser.online = true;
     } else {
-      users.push(updatedUser);
+      users.push(updatedUser); // add created user to users []
     }
     console.log('Online', user.name);
     const admin = users.find((x) => x.isAdmin && x.online);
     if (admin) {
-      io.to(admin.socketId).emit('updateUser', updatedUser);
+      // set user online by updateUser with user onine == true
+      io.to(admin.socketId).emit('updateUser', updatedUser); 
     }
     if (updatedUser.isAdmin) {
+      // if an admin logs in, list users for admin
       io.to(updatedUser.socketId).emit('listUsers', users);
     }
   });
@@ -84,12 +109,14 @@ io.on('connection', (socket) => {
     }
   });
 
+  // (message): message it gets listen to
   socket.on('onMessage', (message) => {
     if (message.isAdmin) {
       const user = users.find((x) => x._id === message._id && x.online);
       if (user) {
-        io.to(user.socketId).emit('message', message);
-        user.messages.push(message);
+        // .emit: broadcast messag to someone/or multiple clients
+        io.to(user.socketId).emit('message', message); 
+        user.messages.push(message); // save to message history
       }
     } else {
       const admin = users.find((x) => x.isAdmin && x.online);
@@ -97,7 +124,7 @@ io.on('connection', (socket) => {
         io.to(admin.socketId).emit('message', message);
         const user = users.find((x) => x._id === message._id && x.online);
         user.messages.push(message);
-      } else {
+      } else { // admin is offline
         io.to(socket.id).emit('message', {
           name: 'Admin',
           body: 'Sorry. I am not online right now',
@@ -113,6 +140,7 @@ app.listen(port, () => {
   console.log(`Serve at http://localhost:${port}`);
 });
 */
+
 server.listen(port, () => {
   console.log(`Serve at http://localhost:${port}`);
 });
