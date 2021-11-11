@@ -31,7 +31,7 @@ userRouter.post(
           name: user.name,
           email: user.email,
           token: generateToken(user),
-          // session: talkSessionInitialize(user)
+          isAdmin: user.isAdmin,
         });
         // console.log('signin API res: ', res); 
         // check token
@@ -59,8 +59,8 @@ userRouter.post(
         _id: createdUser._id,
         name: createdUser.name,
         email: createdUser.email,
+        isAdmin: createdUser.isAdmin,
         token: generateToken(createdUser),
-        session: talkSessionInitialize(user)
       });
     }
     res.status(401).send({ message: 'Invalid Oxy email.' }); // set loading to false & write error message
