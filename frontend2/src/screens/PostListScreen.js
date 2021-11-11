@@ -41,7 +41,7 @@ export default function PostListScreen(props) {
     return (
         <div>
             <div className="row">
-                <h1>Products</h1>
+                <h1>Manage My Posts</h1>
             </div>
             {loading ? (
                 <LoadingBox></LoadingBox>
@@ -51,7 +51,6 @@ export default function PostListScreen(props) {
                 <table className="table">
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>NAME</th>
                             <th>PRICE</th>
                             <th>ACTIONS</th>
@@ -60,7 +59,6 @@ export default function PostListScreen(props) {
                     <tbody>
                         {products.map((product) => (
                             <tr key={product._id}>
-                                <td>{product._id}</td>
                                 <td>{product.name}</td>
                                 <td>{product.price}</td>
                                 <td>

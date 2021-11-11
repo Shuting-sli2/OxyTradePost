@@ -6,13 +6,14 @@ import {
   productCreateReducer,
   productDeleteReducer,
 } from './reducers/productReducers';
-import { userRegisterReducer, userSigninReducer} from './reducers/userReducers';
+import { userRegisterReducer, userSigninReducer, userDetailsReducer, userUpdateProfileReducer,} from './reducers/userReducers';
 
 // localStorage does not clear data when the browser closes
+// localStorage stores 'userInfo'
 const initialState = {
   userSignin: {
     userInfo: localStorage.getItem('userInfo')
-      ? JSON.parse(localStorage.getItem('userInfo'))
+      ? JSON.parse(localStorage.getItem('userInfo')) 
       : null,
   },
 };
@@ -24,6 +25,8 @@ const reducer = combineReducers({
   productDetails: productDetailsReducer,
   productCreate: productCreateReducer,
   productDelete: productDeleteReducer,
+  userDetails: userDetailsReducer,
+  userUpdateProfile: userUpdateProfileReducer,
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
