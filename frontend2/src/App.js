@@ -57,8 +57,8 @@ function App() {
                       <Link to="/postlist">My Posts</Link>
                     </li>
                     <li>
-                    <Link to="/support">Support</Link>
-                  </li>
+                      <Link to="/support">Support</Link>
+                    </li>
                   </ul>
                 </div>
               ) : (
@@ -100,7 +100,10 @@ function App() {
             ></PrivateRoute>
             <AdminRoute path="/support" component={SupportScreen}></AdminRoute>
           </main>
-          <footer className="row center">All right reserved</footer>
+          <footer className="row center">
+            {userInfo && !userInfo.isAdmin && <ChatBox userInfo={userInfo} />}
+            <div>All right reserved</div>{' '}
+          </footer>
         </div>
       }
     </BrowserRouter>
