@@ -59,12 +59,12 @@ function App() {
             </div>
           </header>
           <main>
-            <Route path="/product/:id" component={ProductScreen} exact></Route>
-            <Route path="/" component={HomeScreen} exact></Route>
+            <PrivateRoute path="/product/:id" component={ProductScreen} exact></PrivateRoute>
+            <PrivateRoute path="/" component={HomeScreen} exact></PrivateRoute>
             <Route path="/signin" component={SigninScreen}></Route>
-            <Route path="/post" component={CreateProductScreen}></Route>
+            <PrivateRoute path="/post" component={CreateProductScreen}></PrivateRoute>
             <Route path="/register" component={RegisterScreen}></Route>
-            <Route path="/postlist" component={PostListScreen}></Route>
+            <PrivateRoute path="/postlist" component={PostListScreen}></PrivateRoute>
             <PrivateRoute
             path="/profile"
             component={ProfileScreen}
