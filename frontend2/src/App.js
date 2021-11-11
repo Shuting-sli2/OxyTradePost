@@ -12,6 +12,9 @@ import CreateProductScreen from './screens/CreateProductScreen';
 import PostListScreen from './screens/PostListScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import PrivateRoute from './components/PrivateRoute';
+import AdminRoute from './components/AdminRoute';
+import SearchScreen from './components/SearchScreen';
+import SearchBox from './components/SearchBox';
 
 /* https://www.youtube.com/watch?v=TRCDsB9i3bI&t=2545s */
 /* make changes */
@@ -36,47 +39,47 @@ function App() {
             </div>
             <Link to="/post">Post an Item</Link>
             <div>
-            {userInfo ? (
-              <div className="dropdown">
-                <Link to="#">{userInfo.name} <i className="fa fa-caret-down"></i> </Link>
-                <ul className="dropdown-content">
-                  <li>
-                    <Link to="/profile">User Profile</Link>
-                  </li>
-                  <li>
-                    <Link to="#signout" onClick={signoutHandler}>
-                      Sign Out
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/postlist">My Posts</Link>
-                  </li>
-                </ul>
-              </div>
-               ) : (
-                <Link to="/signin">Sign In</Link>
+              {userInfo ? (
+                <div className="dropdown">
+                  <Link to="#">{userInfo.name} <i className="fa fa-caret-down"></i> </Link>
+                  <ul className="dropdown-content">
+                    <li>
+                      <Link to="/profile">User Profile</Link>
+                    </li>
+                    <li>
+                      <Link to="#signout" onClick={signoutHandler}>
+                        Sign Out
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/postlist">My Posts</Link>
+                    </li>
+                  </ul>
+                </div>
+              ) : (
+                <Link to="/signin"></Link>
               )}
-               {userInfo && userInfo.isAdmin && (
-              <div className="dropdown">
-                <Link to="#admin">
-                  Admin <i className="fa fa-caret-down"></i>
-                </Link>
-                <ul className="dropdown-content">
-                  <li>
-                    <Link to="/dashboard">Dashboard</Link>
-                  </li>
-                  <li>
-                    <Link to="/productlist">Products</Link>
-                  </li>
-                  <li>
-                    <Link to="/orderlist">Orders</Link>
-                  </li>
-                  <li>
-                    <Link to="/userlist">Users</Link>
-                  </li>
-                </ul>
-              </div>
-            )}
+              {userInfo && userInfo.isAdmin && (
+                <div className="dropdown">
+                  <Link to="#admin">
+                    Admin <i className="fa fa-caret-down"></i>
+                  </Link>
+                  <ul className="dropdown-content">
+                    <li>
+                      <Link to="/dashboard">Dashboard</Link>
+                    </li>
+                    <li>
+                      <Link to="/productlist">Products</Link>
+                    </li>
+                    <li>
+                      <Link to="/orderlist">Orders</Link>
+                    </li>
+                    <li>
+                      <Link to="/userlist">Users</Link>
+                    </li>
+                  </ul>
+                </div>
+              )}
             </div>
           </header>
           <main>
@@ -87,13 +90,13 @@ function App() {
             <Route path="/register" component={RegisterScreen}></Route>
             <PrivateRoute path="/postlist" component={PostListScreen}></PrivateRoute>
             <PrivateRoute
-            path="/profile"
-            component={ProfileScreen}
-          ></PrivateRoute>
+              path="/profile"
+              component={ProfileScreen}
+            ></PrivateRoute>
           </main>
           <footer className="row center">All right reserved</footer>
         </div>
-       }
+      }
     </BrowserRouter>
   );
 }

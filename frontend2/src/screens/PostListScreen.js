@@ -8,6 +8,7 @@ import { PRODUCT_CREATE_RESET, PRODUCT_DELETE_RESET } from '../constants/product
 export default function PostListScreen(props) {
     const productList = useSelector((state) => state.productList);
     const { loading, error, products } = productList;
+
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
     const dispatch = useDispatch();
@@ -15,9 +16,7 @@ export default function PostListScreen(props) {
     const { successDelete } = productDelete;
 
     const productCreate = useSelector((state) => state.productCreate);
-    const {
-        successCreate,
-    } = productCreate;
+    const {successCreate} = productCreate;
 
     const deleteHandler = (product) => {
         if (window.confirm('Are you sure to delete?')) {
@@ -29,7 +28,6 @@ export default function PostListScreen(props) {
     
     useEffect(() => {
         if (successCreate) {
-            // ????: what does PRODUCT_CREATE_RESET Action do? 
             dispatch({ type: PRODUCT_CREATE_RESET });
         }
         if (successDelete) {

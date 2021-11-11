@@ -218,3 +218,7 @@ td {
   width: 120px;
   text-align: center;
 }
+/* Search */
+.search input {
+  height: 2.4rem;
+}

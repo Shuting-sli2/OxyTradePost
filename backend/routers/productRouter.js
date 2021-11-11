@@ -8,9 +8,11 @@ const productRouter = express.Router();
 productRouter.get(
   '/',
   expressAsyncHandler(async (req, res) => {
-    const seller = req.query.seller || '';
-    const sellerFilter = seller ? { seller } : {};
-    const products = await Product.find({ ...sellerFilter });
+    const name = req.query.name || ''; // for search product
+    const seller = req.query.seller || ''; // for sell product list
+    const nameFilter = name ? { name: { $regex: name, $options: 'i' } } : {}; // for search product
+    const sellerFilter = seller ? { seller } : {}; // for sell product list
+    const products = await Product.find({ ...sellerFilter, ...nameFilter, });
     res.send(products);
   })
 );
