@@ -16,7 +16,6 @@ export default function ProductScreen(props) {
     dispatch(detailsProduct(productId));
   }, [dispatch, productId]);
 
-
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
   // product: product object sent by productRouter
