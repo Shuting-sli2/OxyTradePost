@@ -42,6 +42,7 @@ export default function ChatBox(props) {
     const sk = socketIOClient(ENDPOINT);
     setSocket(sk);
   };
+  
   const submitHandler = (e) => {
     e.preventDefault();
     if (!messageBody.trim()) {

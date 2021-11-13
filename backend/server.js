@@ -39,7 +39,10 @@ const port = process.env.PORT || 5000;
 // CREATE A SERVER
 const server = http.createServer(app);
 const io = new Server(server); // socket io takes in the HTTP object
-const users = [];
+const users = []; //users: users objects array for Socket io server
+
+
+
 // Everything is event based.
 // SERVER SIDE
 // The first event: a connection between server and client
@@ -74,11 +77,13 @@ io.on('connection', (socket) => {
       }
     }
   });
-  // login event takes user as parameter
+  // clien emits "onLogin" event and returns user
+  // server listens to "onLogin" event and takes user as parameter
+  // user input = all users logging from client
   socket.on('onLogin', (user) => {
     const updatedUser = {
-      ...user, // super user attributes
-      online: true, // user.online attribute is common essentials
+      ...user, //super all user attributes
+      online: true, 
       socketId: socket.id,
       messages: [],
     };
@@ -90,12 +95,12 @@ io.on('connection', (socket) => {
       users.push(updatedUser); // add created user to users []
     }
     console.log('Online', user.name);
-    const admin = users.find((x) => x.isAdmin && x.online);
-    if (admin) {
+    const admin = users.find((x) => x.isAdmin && x.online); 
+    if (admin) { //broadcast all admins of the new logged in user
       // set user online by updateUser with user onine == true
       io.to(admin.socketId).emit('updateUser', updatedUser); 
     }
-    if (updatedUser.isAdmin) {
+    if (updatedUser.isAdmin) { //send the new logged in user the online user list
       // if an admin logs in, list users for admin
       io.to(updatedUser.socketId).emit('listUsers', users);
     }
