@@ -3,22 +3,18 @@ import socketIOClient from 'socket.io-client';
 import { useSelector } from 'react-redux';
 import MessageBox from '../components/MessageBox';
 
-let allUsers = []; 
-    // allUsers gets updated when listUsers event happens
-    // setUsers(allUsers)
-let allMessages = []; // setMessages(allMessages)
-let allSelectedUser = {}; // setSelectedUser(allSelectedUser)
+let allUsers = [];
+let allMessages = [];
+let allSelectedUser = {};
 const ENDPOINT =
   window.location.host.indexOf('localhost') >= 0
     ? 'http://127.0.0.1:5000'
     : window.location.host;
+
 export default function SupportScreen() {
   const [selectedUser, setSelectedUser] = useState({});
   const [socket, setSocket] = useState(null);
-  // a mutable ref object whose .current property is initialized to the passed argument (initialValue)
-  // uiMessagesRef: a <ul> of messages <li>s
-  // use (map, index) to fix the missing key issue
-  const uiMessagesRef = useRef(null); // uiMessagesRef.current = null;
+  const uiMessagesRef = useRef(null);
   const [messageBody, setMessageBody] = useState('');
   const [messages, setMessages] = useState([]);
   const [users, setUsers] = useState([]);
@@ -27,31 +23,21 @@ export default function SupportScreen() {
 
   useEffect(() => {
     if (uiMessagesRef.current) {
-        // set scrollwindow margins by x, y coordinate
       uiMessagesRef.current.scrollBy({
-        top: uiMessagesRef.current.clientHeight,// clientHeight: window height
+        top: uiMessagesRef.current.clientHeight,
         left: 0,
         behavior: 'smooth',
       });
     }
 
-    // set up socket when there's no socket yet
-    // 3 situations
-        // 1. the Admin first sends out a message by clicking the submit button 
-            // -> submit handler
-        // 2. socket gets initialized
-        // 3. users get changed when admin selects a user, which sets user.unread to false.
     if (!socket) {
-      const sk = socketIOClient(ENDPOINT); 
+      const sk = socketIOClient(ENDPOINT);
       setSocket(sk);
-      // emit event 'onLogin' to server.
-      // and then listens to a series of events
-      sk.emit('onLogin', { // emit Admin's login
+      sk.emit('onLogin', {
         _id: userInfo._id,
         name: userInfo.name,
         isAdmin: userInfo.isAdmin,
       });
-      console.log("onLogin emitted for user", userInfo.name);
       sk.on('message', (data) => {
         if (allSelectedUser._id === data._id) {
           allMessages = [...allMessages, data];
@@ -66,7 +52,6 @@ export default function SupportScreen() {
         }
         setMessages(allMessages);
       });
-      // listens to regular users login
       sk.on('updateUser', (updatedUser) => {
         const existUser = allUsers.find((user) => user._id === updatedUser._id);
         if (existUser) {
@@ -90,15 +75,12 @@ export default function SupportScreen() {
     }
   }, [messages, socket, users]);
 
-  // selectUser function handler
-  // user parameter is input by admin clicking the button
   const selectUser = (user) => {
     allSelectedUser = user;
-    setSelectedUser(allSelectedUser); // selectedUser = allSelectedUser = user
+    setSelectedUser(allSelectedUser);
     const existUser = allUsers.find((x) => x._id === user._id);
-    if (existUser) { // select a user implies reading the user's message
-        // update the allUsers array with unread attribute updated
-        allUsers = allUsers.map((x) =>
+    if (existUser) {
+      allUsers = allUsers.map((x) =>
         x._id === existUser._id ? { ...x, unread: false } : x
       );
       setUsers(allUsers);
@@ -106,9 +88,6 @@ export default function SupportScreen() {
     socket.emit('onUserSelected', user);
   };
 
-  // setMessages(allMessages);
-  // setMessageBody
-  // socket.emit message ("onMessage")
   const submitHandler = (e) => {
     e.preventDefault();
     if (!messageBody.trim()) {
@@ -130,13 +109,12 @@ export default function SupportScreen() {
       }, 1000);
     }
   };
-  // users.filter((x) => x._id !== userInfo._id
-  // userInfo refers to admin
+
   return (
     <div className="row top full-container">
-      <div className="col-2 support-users">
+      <div className="col-1 support-users">
         {users.filter((x) => x._id !== userInfo._id).length === 0 && (
-          <MessageBox>0 chat yet</MessageBox>
+          <MessageBox>No Online User Found</MessageBox>
         )}
         <ul>
           {users
@@ -164,7 +142,7 @@ export default function SupportScreen() {
       </div>
       <div className="col-3 support-messages">
         {!selectedUser._id ? (
-          <MessageBox>Chat Area</MessageBox>
+          <MessageBox>Select a user to start chat</MessageBox>
         ) : (
           <div>
             <div className="row">

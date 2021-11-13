@@ -13,7 +13,7 @@ export default function ChatBox(props) {
   const [isOpen, setIsOpen] = useState(false);
   const [messageBody, setMessageBody] = useState('');
   const [messages, setMessages] = useState([
-    { name: 'OxyTradePost', body: 'Hello there, message seller of your interests or questions.' },
+    { name: 'Admin', body: 'Hello there, Please ask your question.' },
   ]);
 
   useEffect(() => {
@@ -42,7 +42,6 @@ export default function ChatBox(props) {
     const sk = socketIOClient(ENDPOINT);
     setSocket(sk);
   };
-
   const submitHandler = (e) => {
     e.preventDefault();
     if (!messageBody.trim()) {
@@ -72,7 +71,7 @@ export default function ChatBox(props) {
       ) : (
         <div className="card card-body">
           <div className="row">
-            <strong>Support </strong>
+            <strong>Message seller</strong>
             <button type="button" onClick={closeHandler}>
               <i className="fa fa-close" />
             </button>

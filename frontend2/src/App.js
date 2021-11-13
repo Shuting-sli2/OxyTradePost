@@ -57,7 +57,7 @@ function App() {
                       <Link to="/postlist">My Posts</Link>
                     </li>
                     <li>
-                      <Link to="/support">Chat</Link>
+                      <Link to="/support">Inbox</Link>
                     </li>
                   </ul>
                 </div>
