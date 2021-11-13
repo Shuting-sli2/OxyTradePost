@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
 import socketIOClient from 'socket.io-client';
 
 const ENDPOINT =
@@ -15,6 +16,9 @@ export default function ChatBox(props) {
   const [messages, setMessages] = useState([
     { name: 'Admin', body: 'Hello there, Please ask your question.' },
   ]);
+  const productDetails = useSelector((state) => state.productDetails);
+  const { loading, error, product } = productDetails;
+  // console.log("Trying to contact this seller: ", product.seller);
 
   useEffect(() => {
     if (uiMessagesRef.current) {
@@ -29,6 +33,7 @@ export default function ChatBox(props) {
         _id: userInfo._id,
         name: userInfo.name,
         isAdmin: userInfo.isAdmin,
+        toSeller: product.seller
       });
       socket.on('message', (data) => {
         setMessages([...messages, { body: data.body, name: data.name }]);
@@ -55,6 +60,7 @@ export default function ChatBox(props) {
           name: userInfo.name,
           isAdmin: userInfo.isAdmin,
           _id: userInfo._id,
+          toSeller: product.seller
         });
       }, 1000);
     }

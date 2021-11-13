@@ -88,7 +88,9 @@ io.on('connection', (socket) => {
       online: true, 
       socketId: socket.id,
       messages: [],
+      toSeller: user.toSeller,
     };
+    console.log("received seller info: ", updatedUser.toSeller);
     const existUser = users.find((x) => x._id === updatedUser._id);
     if (existUser) {
       existUser.socketId = socket.id;
@@ -97,6 +99,15 @@ io.on('connection', (socket) => {
       users.push(updatedUser); // add created user to users []
     }
     console.log('Online', user.name);
+    console.log('user info: ', user); 
+
+    const seller = users.find((x) => (x._id === updatedUser.toSeller) && x.online); 
+    if (seller){
+      console.log('seller name: ', seller.name);
+    }else{
+      console.log('seller not logged in');
+    }
+
     const admin = users.find((x) => x.isAdmin && x.online); 
     if (admin) { //broadcast all admins of the new logged in user
       // set user online by updateUser with user onine == true
