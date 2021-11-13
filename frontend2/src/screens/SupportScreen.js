@@ -136,7 +136,7 @@ export default function SupportScreen() {
     <div className="row top full-container">
       <div className="col-2 support-users">
         {users.filter((x) => x._id !== userInfo._id).length === 0 && (
-          <MessageBox>No Online User Found</MessageBox>
+          <MessageBox>No buyer has contacted you yet.</MessageBox>
         )}
         <ul>
           {users
