@@ -37,9 +37,10 @@ app.use((err, req, res, next) => {
 const port = process.env.PORT || 5000;
 
 // CREATE A SERVER
-const server = http.createServer(app);
+// const server = http.createServer(app);
+const server = http.Server(app);
 // const io = new Server(server); // socket io takes in the HTTP object
-const io = new Server(httpServer, { cors: { origin: '*' } });
+const io = new Server(server, { cors: { origin: '*' } });
 const users = []; //users: users objects array for Socket io server
 
 
