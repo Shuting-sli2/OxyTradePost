@@ -44,7 +44,6 @@ const io = new Server(server, { cors: { origin: '*' } });
 const users = []; //users: users objects array for Socket io server
 
 
-
 // Everything is event based.
 // SERVER SIDE
 // The first event: a connection between server and client
