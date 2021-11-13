@@ -134,7 +134,7 @@ export default function SupportScreen() {
   // userInfo refers to admin
   return (
     <div className="row top full-container">
-      <div className="col-1 support-users">
+      <div className="col-2 support-users">
         {users.filter((x) => x._id !== userInfo._id).length === 0 && (
           <MessageBox>No Online User Found</MessageBox>
         )}
