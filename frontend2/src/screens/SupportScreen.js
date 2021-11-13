@@ -136,7 +136,7 @@ export default function SupportScreen() {
     <div className="row top full-container">
       <div className="col-2 support-users">
         {users.filter((x) => x._id !== userInfo._id).length === 0 && (
-          <MessageBox>No buyer has contacted you yet.</MessageBox>
+          <MessageBox>0 chat yet</MessageBox>
         )}
         <ul>
           {users
@@ -164,7 +164,7 @@ export default function SupportScreen() {
       </div>
       <div className="col-3 support-messages">
         {!selectedUser._id ? (
-          <MessageBox>Select a user to start chat</MessageBox>
+          <MessageBox>Chat Area</MessageBox>
         ) : (
           <div>
             <div className="row">

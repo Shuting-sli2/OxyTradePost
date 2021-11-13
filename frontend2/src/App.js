@@ -77,10 +77,9 @@ function App() {
               path="/profile"
               component={ProfileScreen}
             ></PrivateRoute>
-            <AdminRoute path="/support" component={SupportScreen}></AdminRoute>
+            <PrivateRoute path="/support" component={SupportScreen}></PrivateRoute>
           </main>
           <footer className="row center">
-            {userInfo && !userInfo.isAdmin && <ChatBox userInfo={userInfo} />}
             <div>All right reserved</div>{' '}
           </footer>
         </div>
