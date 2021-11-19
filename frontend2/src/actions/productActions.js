@@ -44,12 +44,12 @@ export const detailsProduct = (productId) => async (dispatch) => {
   }
 };
 
-export const createProduct = (name, price, imageUrl, description, userid) => async (dispatch) => {
-  dispatch({ type: PRODUCT_CREATE_REQUEST, payload: { name, price, imageUrl, description, userid } });
+export const createProduct = (name, price, imageUrl, description, userid, userPhone) => async (dispatch) => {
+  dispatch({ type: PRODUCT_CREATE_REQUEST, payload: { name, price, imageUrl, description, userid, userPhone } });
   try {
     const { data } = await Axios.post(
       '/api/products',
-      { name, price, imageUrl, description, userid }
+      { name, price, imageUrl, description, userid, userPhone }
     );
     dispatch({ type: PRODUCT_CREATE_SUCCESS, payload: data });
   } catch (error) {

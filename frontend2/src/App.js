@@ -56,9 +56,6 @@ function App() {
                     <li>
                       <Link to="/postlist">My Posts</Link>
                     </li>
-                    <li>
-                      <Link to="/support">Inbox</Link>
-                    </li>
                   </ul>
                 </div>
               ) : (

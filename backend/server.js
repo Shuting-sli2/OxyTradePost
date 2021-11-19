@@ -44,7 +44,6 @@ const io = new Server(server, { cors: { origin: '*' } });
 const users = []; //users: users objects array for Socket io server
 
 
-
 // Everything is event based.
 // SERVER SIDE
 // The first event: a connection between server and client
@@ -91,6 +90,7 @@ io.on('connection', (socket) => {
       toSeller: user.toSeller,
     };
     console.log("received seller info: ", updatedUser.toSeller);
+    
     const existUser = users.find((x) => x._id === updatedUser._id);
     if (existUser) {
       existUser.socketId = socket.id;
@@ -104,10 +104,26 @@ io.on('connection', (socket) => {
     const seller = users.find((x) => (x._id === updatedUser.toSeller) && x.online); 
     if (seller){
       console.log('seller name: ', seller.name);
-    }else{
-      console.log('seller not logged in');
+      io.to(seller.socketId).emit('updateUser', updatedUser); 
     }
 
+    // no point implementing the chat box
+    // since chat are unlikely to happen in real time
+    // redirect "message seller" to inbox chat page
+
+
+    // if updatedUser is Seller
+      // write isSeller
+      // add seller attribute into database
+      // add is seller api router
+      // user.isSeller
+    // const filteredUser = users.filter((x) => (x.toSeller === updatedUser.toSeller))
+    /*
+    if (updatedUser.isSeller) { //send the new logged in user the online user list
+      // if an admin logs in, list users for admin
+      io.to(updatedUser.socketId).emit('listUsers', users);
+    }
+    */
     const admin = users.find((x) => x.isAdmin && x.online); 
     if (admin) { //broadcast all admins of the new logged in user
       // set user online by updateUser with user onine == true

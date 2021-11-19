@@ -6,7 +6,8 @@ const productSchema = new mongoose.Schema(
     imageUrl: { type: String, required: true },    
     description: { type: String },
     price: { type: Number, required: true },
-    seller: { type: mongoose.Schema.Types.ObjectID, ref: 'User', required: true } // seller: user._id,
+    seller: { type: mongoose.Schema.Types.ObjectID, ref: 'User', required: true }, // seller: user._id,
+    phone: { type: mongoose.Schema.Types.String, ref: 'User', required: true } // seller: user._id,
   },
   {
     timestamps: true,

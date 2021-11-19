@@ -18,8 +18,9 @@ export default function ProductScreen(props) {
 
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
+
   // product: product object sent by productRouter
-  // console.log(product);
+  // console.log(product.seller);
   return (
     <div>
       {loading ? (
@@ -41,13 +42,13 @@ export default function ProductScreen(props) {
                 <li>
                   <h1>{product.name}</h1>
                 </li>
-                <li>Pirce : ${product.price}</li>
+                <li><b>Pirce: </b>${product.price}</li>
                 <li>
-                  Description:
+                  <b> Description: </b>
                   <p>{product.description}</p>
                 </li>
                 <li>
-                  {userInfo && !userInfo.isAdmin && <ChatBox userInfo={userInfo} />}
+                  <b>Contact seller at phone: </b>{product.phone}
                 </li>
               </ul>
             </div>

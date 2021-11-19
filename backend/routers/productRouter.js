@@ -55,7 +55,8 @@ productRouter.post(
       imageUrl: req.body.imageUrl, 
       price: req.body.price,
       description: req.body.description,
-      seller: req.body.userid
+      seller: req.body.userid,
+      phone: req.body.userPhone
     });
     // insert the product into the database
     const newProduct = await product.save(); //this.save() might not be working
@@ -64,7 +65,8 @@ productRouter.post(
       imageUrl: newProduct.imageUrl,
       price: newProduct.price,
       description: newProduct.description,
-      seller: newProduct.seller
+      seller: newProduct.seller,
+      phone: newProduct.phone
     });
   }))
 

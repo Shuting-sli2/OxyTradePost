@@ -29,6 +29,7 @@ userRouter.post(
           _id: user._id,
           name: user.name,
           email: user.email,
+          phone: user.phone,
           token: generateToken(user),
           isAdmin: user.isAdmin,
         });
@@ -48,6 +49,7 @@ userRouter.post(
     const user = new User({
       name: req.body.name,
       email: req.body.email,
+      phone: req.body.phone,
       password: bcrypt.hashSync(req.body.password, 8),
     });
     // When you create an instance of a Mongoose model using new
@@ -58,6 +60,7 @@ userRouter.post(
         _id: createdUser._id,
         name: createdUser.name,
         email: createdUser.email,
+        phone: createdUser.phone,
         isAdmin: createdUser.isAdmin,
         token: generateToken(createdUser),
       });
@@ -86,6 +89,7 @@ userRouter.put(
     if (user) {
       user.name = req.body.name || user.name;
       user.email = req.body.email || user.email;
+      user.phone = req.body.phone || user.phone;
       if (req.body.password) {
         user.password = bcrypt.hashSync(req.body.password, 8);
       }
@@ -94,6 +98,7 @@ userRouter.put(
         _id: updatedUser._id,
         name: updatedUser.name,
         email: updatedUser.email,
+        phone: updatedUser.phone,
         isAdmin: updatedUser.isAdmin,
         token: generateToken(updatedUser),
       });

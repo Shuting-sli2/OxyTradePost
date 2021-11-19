@@ -25,9 +25,9 @@ export default function CreateProductScreen(props) {
     const userid = userInfo._id;
     const userPhone = userInfo.phone;
     const userName = userInfo.name;
-    console.log(userid);
-    console.log(userPhone);
-    console.log(userName);
+    // console.log(userid);
+    // console.log(userPhone);
+    // console.log(userName);
 
     const onChange = (e) => {
         setImage(e.target.files[0]);
