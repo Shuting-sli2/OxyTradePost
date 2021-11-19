@@ -46,15 +46,15 @@ function App() {
                   <Link to="#">{userInfo.name} <i className="fa fa-caret-down"></i> </Link>
                   <ul className="dropdown-content">
                     <li>
-                      <Link to="/profile">User Profile</Link>
+                      <Link to="/profile">My Profile</Link>
+                    </li>
+                    <li>
+                      <Link to="/postlist">My Posts</Link>
                     </li>
                     <li>
                       <Link to="#signout" onClick={signoutHandler}>
                         Sign Out
                       </Link>
-                    </li>
-                    <li>
-                      <Link to="/postlist">My Posts</Link>
                     </li>
                   </ul>
                 </div>
