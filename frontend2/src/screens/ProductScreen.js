@@ -2,13 +2,15 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { detailsProduct } from '../actions/productActions';
+import ChatBox from '../components/ChatBox';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
 export default function ProductScreen(props) {
-
   const dispatch = useDispatch();
   const productId = props.match.params.id;
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
 
   useEffect(() => {
     dispatch(detailsProduct(productId));
@@ -16,9 +18,9 @@ export default function ProductScreen(props) {
 
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
-  // product: product object sent by productRouter
-  // console.log(product);
 
+  // product: product object sent by productRouter
+  // console.log(product.seller);
   return (
     <div>
       {loading ? (
@@ -28,8 +30,6 @@ export default function ProductScreen(props) {
       ) : (
         <div>
           <div className="row top">
-            <div className="col-1">
-            </div>
             <div className="col-2">
               <img
                 className="large"
@@ -42,13 +42,13 @@ export default function ProductScreen(props) {
                 <li>
                   <h1>{product.name}</h1>
                 </li>
-                <li>Pirce : ${product.price}</li>
+                <li><b>Pirce: </b>${product.price}</li>
                 <li>
-                  Description:
+                  <b> Description: </b>
                   <p>{product.description}</p>
                 </li>
                 <li>
-                  <button className="primary block">Message Seller</button>
+                  <b>Contact seller at phone: </b>{product.phone}
                 </li>
               </ul>
             </div>
@@ -57,6 +57,8 @@ export default function ProductScreen(props) {
       )}
     </div>
   );
-
-
 }
+
+/*
+
+*/

@@ -8,9 +8,11 @@ const productRouter = express.Router();
 productRouter.get(
   '/',
   expressAsyncHandler(async (req, res) => {
-    const seller = req.query.seller || '';
-    const sellerFilter = seller ? { seller } : {};
-    const products = await Product.find({ ...sellerFilter });
+    const name = req.query.name || ''; // for search product
+    const seller = req.query.seller || ''; // for sell product list
+    const nameFilter = name ? { name: { $regex: name, $options: 'i' } } : {}; // for search product
+    const sellerFilter = seller ? { seller } : {}; // for sell product list
+    const products = await Product.find({ ...sellerFilter, ...nameFilter, });
     res.send(products);
   })
 );
@@ -53,7 +55,8 @@ productRouter.post(
       imageUrl: req.body.imageUrl, 
       price: req.body.price,
       description: req.body.description,
-      seller: req.body.userid
+      seller: req.body.userid,
+      phone: req.body.userPhone
     });
     // insert the product into the database
     const newProduct = await product.save(); //this.save() might not be working
@@ -62,7 +65,8 @@ productRouter.post(
       imageUrl: newProduct.imageUrl,
       price: newProduct.price,
       description: newProduct.description,
-      seller: newProduct.seller
+      seller: newProduct.seller,
+      phone: newProduct.phone
     });
   }))
 

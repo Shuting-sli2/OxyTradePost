@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createProduct } from '../actions/productActions';
 import axios from 'axios';
+import LoadingBox from '../components/LoadingBox';
+import MessageBox from '../components/MessageBox';
 // import ImageUploader from "react-images-upload"; // https://github.com/JakeHartnell/react-images-upload
 
 const url = 'https://api.cloudinary.com/v1_1/oxytradepost/image/upload';
@@ -17,12 +19,16 @@ export default function CreateProductScreen(props) {
     const dispatch = useDispatch();
 
     const productCreated = useSelector((state) => state.productCreate);
-    const { productInfo } = productCreated;
+    const { productInfo, errorProduct, loadingProduct } = productCreated;
 
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
     // console.log("userInfo._id: ",userInfo._id);
     const userid = userInfo._id;
+    const userPhone = userInfo.phone;
+    // console.log(userid);
+    // console.log(userPhone);
+    // console.log(userName);
 
     const onChange = (e) => {
         setImage(e.target.files[0]);
@@ -42,7 +48,7 @@ export default function CreateProductScreen(props) {
                     // console.log(result.data.secure_url);
                     var imageUrl = result.data.secure_url;
                     // console.log(imageUrl);
-                    dispatch(createProduct(name, price, imageUrl, description, userid));
+                    dispatch(createProduct(name, price, imageUrl, description, userid, userPhone));
                     // console.log("productInfo: ", productInfo); // product undefined
                     setImage(productInfo.imageUrl);
                     /*
@@ -62,19 +68,27 @@ export default function CreateProductScreen(props) {
             console.error(err);
         }
     }
-    // redirect
-    useEffect(() => {
-        if (productInfo) {
-            props.history.push('/');
-        }
-    }, [productInfo, props.history]);
-
     return (
         <div>
             <form className="form" onSubmit={onSubmit}>
                 <div>
                     <h1>Create a post</h1>
                 </div>
+                {loadingProduct ? (
+                    <LoadingBox></LoadingBox>
+                ) : errorProduct ? (
+                    <MessageBox variant="danger">{errorProduct}</MessageBox>
+                ) : (
+                    <>
+                        {loadingProduct && <LoadingBox></LoadingBox>}
+                        {errorProduct && (
+                            <MessageBox variant="danger">{errorProduct}</MessageBox>
+                        )}
+                        {productInfo && (
+                            <MessageBox variant="success">
+                                Post created successfully. Check out the main page!
+                            </MessageBox>
+                        )}
                 <div>
                     <label htmlFor="name">Product Name</label>
                     <input
@@ -125,6 +139,8 @@ export default function CreateProductScreen(props) {
                         Submit
                     </button>
                 </div>
+                </>
+                )}
             </form>
         </div>
     );

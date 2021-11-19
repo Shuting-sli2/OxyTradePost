@@ -8,6 +8,7 @@ import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants';
 export default function ProfileScreen() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -33,6 +34,7 @@ export default function ProfileScreen() {
         } else {
             setName(user.name);
             setEmail(user.email);
+            setPhone(user.phone);
         }
     }, [dispatch, userInfo._id, user]);
 
@@ -43,14 +45,14 @@ export default function ProfileScreen() {
         if (password !== confirmPassword) {
             alert('Password and Confirm Password Are Not Matched');
         } else {
-            dispatch(updateUserProfile({ userId: user._id, name, email, password }));
+            dispatch(updateUserProfile({ userId: user._id, name, email, phone, password }));
         }
     };
     return (
         <div>
             <form className="form" onSubmit={submitHandler}>
                 <div>
-                    <h1>User Profile</h1>
+                    <h1>Update Profile</h1>
                 </div>
                 {loading ? (
                     <LoadingBox></LoadingBox>
@@ -73,7 +75,7 @@ export default function ProfileScreen() {
                                 id="name"
                                 type="text"
                                 placeholder="Enter name"
-                                value={user.name}
+                                // value={user.name}
                                 onChange={(e) => setName(e.target.value)}
                             ></input>
                         </div>
@@ -83,8 +85,18 @@ export default function ProfileScreen() {
                                 id="email"
                                 type="email"
                                 placeholder="Enter email"
-                                value={user.email}
+                                //value={user.email}
                                 onChange={(e) => setEmail(e.target.value)}
+                            ></input>
+                        </div>
+                        <div>
+                            <label htmlFor="phone">Phone</label>
+                            <input
+                                id="phone"
+                                type="phone"
+                                placeholder="Enter phone"
+                                // value={user.phone}
+                                onChange={(e) => setPhone(e.target.value)}
                             ></input>
                         </div>
                         <div>

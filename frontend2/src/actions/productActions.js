@@ -14,17 +14,20 @@ import {
   PRODUCT_DELETE_SUCCESS,
 } from '../constants/productConstants';
 
-export const listProducts = ({ seller = '' }) => async (dispatch) => {
+export const listProducts = ({ seller = '', name = '' }) => async (dispatch) => {
   dispatch({
     type: PRODUCT_LIST_REQUEST,
   });
   try {
-    const { data } = await Axios.get(`/api/products?seller=${seller}`);
+    const { data } = await Axios.get(
+      `/api/products?seller=${seller}&name=${name}`
+    );
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: PRODUCT_LIST_FAIL, payload: error.message });
   }
 };
+
 export const detailsProduct = (productId) => async (dispatch) => {
   dispatch({ type: PRODUCT_DETAILS_REQUEST, payload: productId });
   try {
@@ -41,12 +44,12 @@ export const detailsProduct = (productId) => async (dispatch) => {
   }
 };
 
-export const createProduct = (name, price, imageUrl, description, userid) => async (dispatch) => {
-  dispatch({ type: PRODUCT_CREATE_REQUEST, payload: { name, price, imageUrl, description, userid } });
+export const createProduct = (name, price, imageUrl, description, userid, userPhone) => async (dispatch) => {
+  dispatch({ type: PRODUCT_CREATE_REQUEST, payload: { name, price, imageUrl, description, userid, userPhone } });
   try {
     const { data } = await Axios.post(
       '/api/products',
-      { name, price, imageUrl, description, userid }
+      { name, price, imageUrl, description, userid, userPhone }
     );
     dispatch({ type: PRODUCT_CREATE_SUCCESS, payload: data });
   } catch (error) {
