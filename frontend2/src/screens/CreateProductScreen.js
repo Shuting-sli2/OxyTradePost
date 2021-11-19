@@ -23,6 +23,11 @@ export default function CreateProductScreen(props) {
     const { userInfo } = userSignin;
     // console.log("userInfo._id: ",userInfo._id);
     const userid = userInfo._id;
+    const userPhone = userInfo.phone;
+    const userName = userInfo.name;
+    console.log(userid);
+    console.log(userPhone);
+    console.log(userName);
 
     const onChange = (e) => {
         setImage(e.target.files[0]);
@@ -42,7 +47,7 @@ export default function CreateProductScreen(props) {
                     // console.log(result.data.secure_url);
                     var imageUrl = result.data.secure_url;
                     // console.log(imageUrl);
-                    dispatch(createProduct(name, price, imageUrl, description, userid));
+                    dispatch(createProduct(name, price, imageUrl, description, userid, userPhone));
                     // console.log("productInfo: ", productInfo); // product undefined
                     setImage(productInfo.imageUrl);
                     /*
