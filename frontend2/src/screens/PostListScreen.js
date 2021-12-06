@@ -13,10 +13,10 @@ export default function PostListScreen(props) {
     const { userInfo } = userSignin;
     const dispatch = useDispatch();
     const productDelete = useSelector((state) => state.productDelete);
-    const { successDelete } = productDelete;
+    const { successDelete, loadingDelete, errorDelete } = productDelete;
 
     const productCreate = useSelector((state) => state.productCreate);
-    const {successCreate} = productCreate;
+    const { successCreate } = productCreate;
 
     const deleteHandler = (product) => {
         if (window.confirm('Are you sure to delete?')) {
@@ -25,7 +25,7 @@ export default function PostListScreen(props) {
     };
     // console.log("userInfo._id: ", userInfo._id); 
     // also need to dispatch listProducts when product is created/deleted
-    
+
     useEffect(() => {
         if (successCreate) {
             dispatch({ type: PRODUCT_CREATE_RESET });
@@ -46,31 +46,42 @@ export default function PostListScreen(props) {
             ) : error ? (
                 <MessageBox variant="danger">{error}</MessageBox>
             ) : (
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th>NAME</th>
-                            <th>PRICE</th>
-                            <th>ACTIONS</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {products.map((product) => (
-                            <tr key={product._id}>
-                                <td>{product.name}</td>
-                                <td>{product.price}</td>
-                                <td>
-                                    <button
-                                        type="button"
-                                        className="small"
-                                        onClick={() => deleteHandler(product)}
-                                    >Delete
-                                    </button>
-                                </td>
+                <>
+                    {loadingDelete && <LoadingBox></LoadingBox>}
+                    {errorDelete && (
+                        <MessageBox variant="danger">{errorDelete}</MessageBox>
+                    )}
+                    {successDelete && (
+                        <MessageBox variant="success">
+                            Post deleted.
+                        </MessageBox>
+                    )}
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th>NAME</th>
+                                <th>PRICE</th>
+                                <th>ACTIONS</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {products.map((product) => (
+                                <tr key={product._id}>
+                                    <td>{product.name}</td>
+                                    <td>{product.price}</td>
+                                    <td>
+                                        <button
+                                            type="button"
+                                            className="small"
+                                            onClick={() => deleteHandler(product)}
+                                        >Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </>
             )}
         </div>
     );
