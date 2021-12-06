@@ -44,12 +44,12 @@ export default function ProductScreen(props) {
                 </li>
                 <li><b>Pirce: </b>${product.price}</li>
                 <li>
-                  <b> Description: </b>
-                  <p>{product.description}</p>
-                </li>
-                <li>
                   <b>Contact seller at phone: </b>{product.phone}
                 </li>
+                <li>
+                   <pre><b>Description: </b>{product.description}</pre>
+                  
+                </li>  
               </ul>
             </div>
           </div>
