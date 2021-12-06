@@ -5,6 +5,7 @@ import axios from 'axios';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 // import ImageUploader from "react-images-upload"; // https://github.com/JakeHartnell/react-images-upload
+import { PRODUCT_CREATE_RESET } from '../constants/productConstants';
 
 const url = 'https://api.cloudinary.com/v1_1/oxytradepost/image/upload';
 const preset = 'coreja3i';
@@ -18,6 +19,7 @@ export default function CreateProductScreen(props) {
     const [image, setImage] = useState('');
     const dispatch = useDispatch();
 
+
     const productCreated = useSelector((state) => state.productCreate);
     const { productInfo, errorProduct, loadingProduct } = productCreated;
 
@@ -29,6 +31,13 @@ export default function CreateProductScreen(props) {
     // console.log(userid);
     // console.log(userPhone);
     // console.log(userName);
+
+    useEffect(() => {
+        if (productInfo) {
+            dispatch({ type: PRODUCT_CREATE_RESET });
+            props.history.push('/');
+        }
+    }, [productInfo, dispatch, props.history]);
 
     const onChange = (e) => {
         setImage(e.target.files[0]);
@@ -71,9 +80,7 @@ export default function CreateProductScreen(props) {
     return (
         <div>
             <form className="form" onSubmit={onSubmit}>
-                <div>
-                    <h1>Create a post</h1>
-                </div>
+                <div><h1>Create a post</h1></div>
                 {loadingProduct ? (
                     <LoadingBox></LoadingBox>
                 ) : errorProduct ? (
@@ -89,57 +96,57 @@ export default function CreateProductScreen(props) {
                                 Post created successfully. Check out the main page!
                             </MessageBox>
                         )}
-                <div>
-                    <label htmlFor="name">Product Name</label>
-                    <input
-                        id="name"
-                        type="text"
-                        placeholder="Enter name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        required
-                    ></input>
-                </div>
-                <div>
-                    <label htmlFor="price">Price</label>
-                    <input
-                        id="price"
-                        type="text"
-                        placeholder="Enter price"
-                        value={price}
-                        onChange={(e) => setPrice(e.target.value)}
-                        required
-                    ></input>
-                </div>
-                <div>
-                    <label htmlFor="image">Image</label>
-                    <input
-                        id="image"
-                        type="file"
-                        placeholder="Select an image"
-                        onChange={onChange}
-                        required
-                        multiple
-                    ></input>
-                </div>
-                <div>
-                    <label htmlFor="description">Description</label>
-                    <textarea
-                        id="description"
-                        rows="3"
-                        type="text"
-                        placeholder="Enter description"
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                    ></textarea>
-                </div>
-                <div>
-                    <label></label>
-                    <button className="primary" type="submit" >
-                        Submit
-                    </button>
-                </div>
-                </>
+                        <div>
+                            <label htmlFor="name">Product Name</label>
+                            <input
+                                id="name"
+                                type="text"
+                                placeholder="Enter name"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                required
+                            ></input>
+                        </div>
+                        <div>
+                            <label htmlFor="price">Price</label>
+                            <input
+                                id="price"
+                                type="text"
+                                placeholder="Enter price"
+                                value={price}
+                                onChange={(e) => setPrice(e.target.value)}
+                                required
+                            ></input>
+                        </div>
+                        <div>
+                            <label htmlFor="image">Image</label>
+                            <input
+                                id="image"
+                                type="file"
+                                placeholder="Select an image"
+                                onChange={onChange}
+                                required
+                                multiple
+                            ></input>
+                        </div>
+                        <div>
+                            <label htmlFor="description">Description</label>
+                            <textarea
+                                id="description"
+                                rows="3"
+                                type="text"
+                                placeholder="Enter description"
+                                value={description}
+                                onChange={(e) => setDescription(e.target.value)}
+                            ></textarea>
+                        </div>
+                        <div>
+                            <label></label>
+                            <button className="primary" type="submit" >
+                                Submit
+                            </button>
+                        </div>
+                    </>
                 )}
             </form>
         </div>
