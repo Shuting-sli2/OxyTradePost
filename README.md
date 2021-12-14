@@ -1,7 +1,7 @@
 # OxyTradePost
 Reproduction Instructions: 
 1. Download the chat branch: https://github.com/Shuting-sli2/OxyTradePost/tree/chat
-3. Remain the folder to “OxyTradePost”
+3. Rename the folder to “OxyTradePost”
 2. Download Visual Code Studio IDE.
 3. Download node.JS: https://nodejs.org/en/
    type npm -v- 
