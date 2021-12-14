@@ -13,6 +13,8 @@ Reproduction Instructions:
       - Create .env file in root folder
       - In .env file, set MONGODB_URL=mongodb+srv://your-db-connection
 		*Note: 1) After setting up your account in MongoDB, choose ‘connect to application’, then proceed to step b & c. 2) Then copy the URI String from the MongoDB       clipboard. MAKE SURE to remove the angle brackets "<"and ">" around <password> when replacing your password from the URI. Also, you should use user password,       not account password.
+7. Open a new terminal, type command 'npm start' to start the backend server
+8. Open a new terminal, type command 'cd fronend2', and then 'npm start' to start the frontend. A new window should props up on your browser. 
  
 Other things: 
 1. Download MongoDB compass to view data in database: https://www.mongodb.com/try/download/compass
