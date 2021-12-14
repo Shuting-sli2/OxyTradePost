@@ -14,23 +14,22 @@ Reproduction Instructions:
       - In .env file, set MONGODB_URL=mongodb+srv://your-db-connection
 		*Note: 1) After setting up your account in MongoDB, choose ‘connect to application’, then proceed to step b & c. 2) Then copy the URI String from the MongoDB       clipboard. MAKE SURE to remove the angle brackets "<"and ">" around <password> when replacing your password from the URI. Also, you should use user password,       not account password.
  
-You don’t have to, but might also want to: 
+Other things: 
 1. Download MongoDB compass to view data in database: https://www.mongodb.com/try/download/compass
-—-------------—-------------—-------------—-------------—-------------—-------------
-A documentation of other libraries installed: 
-npm install mongodb
-npm install express
-npm install axios
-npm install redux react-redux
-npm install mongoose
-npm install dotenv
-npm install jsonwebtoken
-npm install cloudinary
-npm install cors
-npm install socket.io
-npm install bcryptjs
-npm install --save-dev cross-env
-npm install --save express-async-handler
-npm install --save react-images-upload
-npm i socket.io-client
-npm install eslint@7 --save-dev
+2. A documentation of other libraries installed: 
+	1. npm install mongodb
+	2. npm install express
+	3. npm install axios
+	4. npm install redux react-redux
+	5. npm install mongoose
+	6. npm install dotenv
+	7. npm install jsonwebtoken
+	8. npm install cloudinary
+	9. npm install cors
+	10. npm install socket.io
+	11. npm install bcryptjs
+	12. npm install --save-dev cross-env
+	13. npm install --save express-async-handler
+	14. npm install --save react-images-upload
+	15. npm i socket.io-client
+	16. npm install eslint@7 --save-dev
