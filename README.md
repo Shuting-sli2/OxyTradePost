@@ -1,4 +1,3 @@
-# OxyTradePost
 Reproduction Instructions:
 
 Download the chat branch: https://github.com/Shuting-sli2/OxyTradePost/tree/chat
